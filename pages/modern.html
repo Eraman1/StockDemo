@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tax Invoice</title>
+    <style>
+        .modern {
+            font-family: Arial, sans-serif;
+            /* margin: 20px; */
+        }
+
+        .modern .Moderninvoice {
+            max-width: 700px;
+            margin: 20px auto;
+            background-color: white;
+        }
+
+        .modern .Moderninvoice .invoiceHead {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 0px !important;
+            color: #000;
+        }
+
+        .modern .header {
+            display: flex;
+
+            /* border: 1px solid #000; */
+        }
+
+        .headerbg {
+            background-color: rgb(202, 241, 241);
+        }
+
+        .modern .header .logo {
+            width: 7rem;
+            /* Adjust as needed */
+            height: 7rem;
+            /* Adjust as needed */
+            /* border: 1px solid #ccc; */
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+
+        }
+
+        .modern .header .left {
+            display: flex;
+            width: 50%;
+            padding: 5px;
+        }
+
+        .modern .header .main {
+            width: 100%;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+
+        .modern .header h1 {
+            margin: 0;
+            font-size: 24px;
+            color: blue;
+        }
+
+        /* .modern .header button {
+                padding: 5px 20px;
+                font-size: 18px;
+                background-color: #fff;
+                border: none;
+            } */
+
+        .modern .header p {
+            margin: 3px 0;
+            font-size: 13px;
+            color: #000;
+        }
+
+        .modern .header .right {
+            text-align: right;
+            font-size: 14px;
+            width: 50%;
+            padding: 5px;
+        }
+
+        .modern .details {
+            display: flex;
+            border-left: 1px solid #000;
+            border-right: 1px solid #000;
+        }
+
+        .modern .details .section p {
+            margin: 0;
+            font-size: small;
+            color: #000;
+        }
+
+        .modern .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 10px;
+            border-top: 1px solid #000;
+            border-bottom: 1px solid #000;
+            border-left: none !important;
+            border-right: none !important;
+        }
+
+        .modern .header h2 {
+            font-size: 1.4rem;
+            color: #000;
+        }
+
+        .changeHeaderforthispageOnly {
+            margin-top: 1.5rem;
+        }
+
+        .modern .table thead {
+
+            background-color: blue;
+        }
+
+        .modern .table thead th {
+            color: #fff;
+        }
+
+
+        .modern .table th,
+        .modern .table td {
+            border-left: none !important;
+            border-right: none !important;
+            border-top: 1px solid gray !important;
+            border-bottom: 1px solid gray !important;
+            padding: 10px;
+            text-align: left;
+            font-size: small;
+            word-wrap: break-word;
+            word-break: break-word;
+            vertical-align: top;
+            color: #000;
+        }
+
+        .modern .footer-section {
+            width: 100%;
+            /* border: 1px solid #000; */
+            border-collapse: collapse;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            margin-top: 2rem;
+        }
+
+
+
+        .modern .remark-terms {
+            display: flex;
+        }
+
+        .modern .remark {
+            flex: 2;
+            padding: 10px;
+            color: #000;
+        }
+
+        .modern .terms {
+            flex: 2;
+            padding: 10px;
+            color: #000;
+            /* border: 1px solid black; */
+        }
+
+        .modern .terms p {
+            font-size: small;
+            ;
+            color: #000;
+        }
+
+        .modern .signature {
+            flex: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            /* border-left: 1px solid #000; */
+            color: #000;
+        }
+
+        .modern .signature img {
+            width: 100%;
+            height: 70px;
+        }
+
+        .modern .signature .signBox {
+            border: solid 1px #000;
+            width: 100%;
+            height: 4.5rem;
+            margin-top: 2rem;
+        }
+
+        .modern .signature p {
+            margin: 10px 0 0;
+            text-align: right;
+            font-size: 14px;
+        }
+
+        .modern .table .item-column {
+            width: 35%;
+            /* Adjust this width as needed */
+        }
+
+        /* .modern table td:nth-child(2) {
+                width: 30%;
+                /* Ensures the column width applies to the data rows too 
+            } */
+
+
+        /* Existing CSS remains the same */
+
+        /* Add this media query for mobile devices */
+        @media only screen and (max-width: 600px) {
+            .modern .footer-section {
+
+                margin-top: 0;
+            }
+
+            .changeHeaderforthispageOnly {
+                margin-top: 0.5rem;
+            }
+
+            .modern .Moderninvoice .invoiceHead {
+
+                font-size: 1.5rem;
+
+            }
+
+            .modern .header h1 {
+                font-size: 14px;
+                /* Reduce header text size */
+            }
+
+            .modern .header .logo {
+                width: 5rem;
+                /* Adjust as needed */
+                height: 5rem;
+                /* Adjust as needed */
+
+
+            }
+
+            .modern .header p {
+                font-size: 9px;
+                /* Reduce paragraph text size */
+            }
+
+            .modern .details .section p {
+                font-size: 9px;
+                /* Reduce details section text size */
+            }
+
+            .modern .table th,
+            .modern .table td {
+                font-size: 8px;
+                padding: 6px;
+                /* Reduce table text size */
+            }
+
+            .modern .footer-section {
+                font-size: 9px;
+                /* Reduce footer text size */
+            }
+
+            .modern .terms p {
+                font-size: 9px;
+                /* Reduce terms text size */
+            }
+
+            .modern .signature p {
+                font-size: 10px;
+                /* Reduce signature text size */
+            }
+
+            .modern .invoice p {
+                font-size: 9px;
+                /* Reduce invoice title text size */
+            }
+
+            .modern .header h2 {
+                font-size: 0.9rem;
+                /* Reduce "Bill To" and "Ship To" text size */
+            }
+
+            .modern .signature p {
+                font-size: 9px;
+                /* Reduce total amount in words text size */
+            }
+
+            .modern .signature .signBox {
+
+                width: 100%;
+                height: 3rem;
+
+            }
+
+            .modern .signature img {
+                width: 100%;
+                height: 50px;
+            }
+
+        }
+
+        @media print {
+            body {
+                width: 100%;
+            }
+
+            @page {
+                size: 100% auto;
+                margin: 0px;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="modern">
+        <div class="Moderninvoice">
+            <p class="invoiceHead">
+                Invoice</p>
+            <div class="header">
+                <img src="/assets/img/bruce-mars.jpg" class="logo uploadedImage" alt="Logo" />
+                <div class="left main">
+                    <div>
+                        <h1 class="headText">chawdi</h1>
+                        <p>Phone: 8596345874</p>
+                        <p>Email: example@email.com</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bgChanger" style="height: 4px; background-color: blue;">&nbsp;</div>
+            <div class="header headerbg">
+                <div class="left">
+                    <div>
+                        <p><strong>Invoice No:</strong> S01</p>
+                    </div>
+                </div>
+                <div class="right">
+                    <div>
+                        <p><strong>Invoice Date:</strong> 10 Jan 2025</p>
+                    </div>
+                </div>
+            </div>
+            <div class="header">
+                <div class="left ">
+                    <div>
+
+                        <H2>Bill To</H2>
+                        <p>hello..........</p>
+                    </div>
+                </div>
+                <div class="left">
+                    <div>
+                        <H2>Ship To</H2>
+                        <p>hello..........</p>
+                    </div>
+                </div>
+            </div>
+            <table class="table changeHeader changeHeaderforthispageOnly">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th class="item-column">Items</th>
+                        <th>Quantity</th>
+                        <th>Rate</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Apple</td>
+                        <td>5 KG</td>
+                        <td>10045678.00</td>
+                        <td>525.00</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Banana</td>
+                        <td>5 KG</td>
+                        <td>100.00</td>
+                        <td>525.00</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Orange</td>
+                        <td>5 KG</td>
+                        <td>100.00</td>
+                        <td>525.00</td>
+                    </tr>
+                    <tr style=" border-top:2px solid blue ; border-bottom:2px solid blue ;">
+
+                        <td style="text-align: left;" colspan="2"><b>Sub Total</b></td>
+
+                        <td style="text-align: left;" colspan="2"><b>15</b></td>
+
+                        <td style="text-align: left;"><b>₹1555.00</b></td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+            <div class="footer-section">
+
+                <div class="remark-terms">
+                    <div class="terms">
+                        <strong>Remark</strong>
+                        <p>1. Warranty - 3 Years</p>
+                        <strong>Terms & Conditions</strong>
+                        <p>helle this is my own term and you have to follow it</p>
+                    </div>
+                    <div class="signature">
+                        <table class="table">
+
+                            <tbody>
+                                <tr style="border: none !important ;">
+                                    <td style="text-align: left;">Taxable Amount</td>
+                                    <td><b>₹1555.00</b></td>
+                                </tr>
+                                <tr style="border-top:2px solid blue ; border-bottom:2px solid blue ;">
+                                    <td style="text-align: left;"><b>Total Amount</b></td>
+                                    <td><b>₹155345675.00</b></td>
+                                </tr>
+                                <tr style="border: none !important ;">
+                                    <td style="text-align: left; border: none !important ;">Received Amount</td>
+                                    <td><b>₹1555.00</b></td>
+                                </tr>
+                                <tr style="border: none !important ; border: none !important ;">
+                                    <td style="text-align: left;">Balance</td>
+                                    <td><b>₹1555.00</b></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <b style="text-align: right;">Total Amount in Words</b>
+                        <p>
+                            INR Two Hundred Sixty One Only</p>
+
+                        <div class="signature">
+                            <img class="uploadedSign" src="/assets/img/DefaultMan.jpg" alt="Authorized Signature" />
+                            <i>Authorised Signature</i>
+                        </div>
+                        <!-- <div class="signBox"></div>
+                        <i>Authorised Signature</i> -->
+                    </div>
+                </div>
+                <p style="text-align: center; margin-top: 10px; font-size: 10px;">Thank You For Your Business !</p>
+                <p style="text-align: center; margin-top: 10px; font-size: 10px;">Design By <a
+                        href="https://stock-it.in/">Stock
+                        It</a></p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

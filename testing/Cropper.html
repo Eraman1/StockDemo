@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image Upload, Crop & Compress</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css"
+    />
+    <style>
+      .modal-body-2 {
+        display: none;
+        max-height: 70vh; /* Limit modal height */
+        overflow-y: auto; /* Enable scroll for large images */
+        padding: 10px;
+        text-align: center;
+      }
+
+      #cropImage {
+        max-width: 100%;
+        height: auto;
+        margin-bottom: 10px; /* Add space between image and button */
+      }
+
+      #cropSaveBtn {
+        position: sticky;
+        bottom: 0; /* Sticks button at the bottom */
+        z-index: 10;
+      }
+
+      #cropImage {
+        max-width: 100%;
+        display: block;
+      }
+
+      .upload-container {
+        text-align: center;
+      }
+
+      .upload-icon {
+        width: 80px;
+        height: 80px;
+        border: 2px dashed gray;
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        position: relative;
+        background-color: #f8f9fa;
+        transition: background-color 0.3s ease;
+      }
+
+      .upload-icon:hover {
+        background-color: #e9ecef;
+      }
+
+      #imageUpload {
+        display: none;
+      }
+
+      #uploadedImage {
+        width: 80px;
+        height: 80px;
+        border: 2px solid gray;
+        border-radius: 10px;
+        object-fit: cover;
+        display: none;
+        cursor: pointer;
+      }
+
+      #uploadedImage.show {
+        display: block;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-light d-flex align-items-center justify-content-center vh-100"
+  >
+    <button
+      class="btn btn-primary"
+      data-bs-toggle="modal"
+      data-bs-target="#myModal"
+    >
+      Edit Profile
+    </button>
+
+    <div
+      class="modal fade"
+      id="myModal"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+    >
+      <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Profile Information</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+
+          <div class="modal-body-2" style="display: none">
+            <img id="cropImage" style="max-width: 100%" />
+            <button id="cropSaveBtn" class="btn btn-success mt-3 w-100">
+              Crop & Save
+            </button>
+          </div>
+
+          <div class="modal-body form-body">
+            <form>
+              <div class="upload-container">
+                <div class="upload-icon" id="uploadIcon">
+                  <i class="bi bi-upload" style="font-size: 24px"></i>
+                </div>
+                <input type="file" id="imageUpload" accept="image/*" />
+                <img id="uploadedImage" src="" alt="Uploaded Image" />
+              </div>
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label for="businessName" class="form-label"
+                    >Business Name</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="businessName"
+                    required
+                  />
+                </div>
+
+                <div class="col-md-6">
+                  <label for="name" class="form-label">Your Name</label>
+                  <input type="text" class="form-control" id="name" required />
+                </div>
+
+                <div class="col-md-6">
+                  <label for="mobile" class="form-label">Mobile No.</label>
+                  <input type="tel" class="form-control" id="mobile" required />
+                </div>
+
+                <div class="col-md-6">
+                  <label for="email" class="form-label">Email</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    required
+                  />
+                </div>
+
+                <div class="col-md-6">
+                  <label for="businessType" class="form-label"
+                    >Business Type</label
+                  >
+                  <select
+                    class="form-select"
+                    id="businessType"
+                    style="width: 100%"
+                  >
+                    <option value="Retail">Retail</option>
+                    <option value="Wholesale">Wholesale</option>
+                    <option value="Service">Service</option>
+                    <option value="Manufacturing">Manufacturing</option>
+                  </select>
+                </div>
+
+                <div class="col-md-6">
+                  <label for="priceUnit" class="form-label">Price Unit</label>
+                  <select
+                    class="form-select"
+                    id="priceUnit"
+                    style="width: 100%"
+                  >
+                    <option value="INR">INR</option>
+                    <option value="USD">USD</option>
+                    <option value="EUR">EUR</option>
+                  </select>
+                </div>
+
+                <div class="col-md-6">
+                  <label for="gst" class="form-label">GST No.</label>
+                  <input type="text" class="form-control" id="gst" />
+                </div>
+
+                <div class="col-md-6">
+                  <label for="location" class="form-label">Location</label>
+                  <input type="text" class="form-control" id="location" />
+                </div>
+
+                <div class="col-12">
+                  <label for="profileSummary" class="form-label"
+                    >Profile Summary</label
+                  >
+                  <textarea
+                    class="form-control"
+                    id="profileSummary"
+                    rows="3"
+                  ></textarea>
+                </div>
+
+                <div class="col-12">
+                  <button type="submit" class="btn btn-success w-100">
+                    Save Changes
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/browser-image-compression/dist/browser-image-compression.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const fileInput = document.getElementById("imageUpload");
+        const cropImage = document.getElementById("cropImage");
+        const cropSaveBtn = document.getElementById("cropSaveBtn");
+        const uploadedImage = document.getElementById("uploadedImage");
+        const uploadIcon = document.getElementById("uploadIcon");
+        const modalBody2 = document.querySelector(".modal-body-2");
+        const formBody = document.querySelector(".form-body");
+
+        let cropper;
+
+        // Trigger file input when clicking the upload icon
+        uploadIcon.addEventListener("click", () => fileInput.click());
+
+        // Trigger file input when clicking the uploaded image
+        uploadedImage.addEventListener("click", () => fileInput.click());
+
+        // When a new image is selected
+        fileInput.addEventListener("change", (event) => {
+          const file = event.target.files[0];
+          if (!file) return;
+
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            cropImage.src = e.target.result;
+            modalBody2.style.display = "block";
+            formBody.style.display = "none";
+          };
+          reader.readAsDataURL(file);
+        });
+
+        // Initialize Cropper when Image Loads
+        cropImage.addEventListener("load", () => {
+          if (cropper) cropper.destroy();
+          cropper = new Cropper(cropImage, {
+            aspectRatio: 1,
+            viewMode: 2,
+            movable: true,
+            zoomable: true,
+            scalable: true,
+            cropBoxResizable: true,
+            minCropBoxWidth: 50,
+            minCropBoxHeight: 50,
+
+            ready() {
+              const imageData = cropper.getImageData();
+              const maxSize = Math.min(200, imageData.width, imageData.height);
+              cropper.setCropBoxData({
+                left: (imageData.width - maxSize) / 2,
+                top: (imageData.height - maxSize) / 2,
+                width: maxSize,
+                height: maxSize,
+              });
+            },
+
+            crop(event) {
+              const cropBoxData = cropper.getCropBoxData();
+              const maxSize = 200;
+
+              if (cropBoxData.width > maxSize) {
+                cropper.setCropBoxData({
+                  width: maxSize,
+                  left: cropBoxData.left,
+                });
+              }
+              if (cropBoxData.height > maxSize) {
+                cropper.setCropBoxData({
+                  height: maxSize,
+                  top: cropBoxData.top,
+                });
+              }
+            },
+          });
+        });
+
+        // Crop & Save button functionality
+        cropSaveBtn.addEventListener("click", async () => {
+          if (!cropper) return;
+
+          const croppedCanvas = cropper.getCroppedCanvas({
+            width: 200,
+            height: 200,
+          });
+          croppedCanvas.toBlob(
+            async (blob) => {
+              const compressedBlob = await compressImage(blob);
+              showCroppedImage(compressedBlob);
+              modalBody2.style.display = "none";
+              formBody.style.display = "block";
+            },
+            "image/jpeg",
+            0.9
+          );
+        });
+
+        // Compress Image Function
+        async function compressImage(imageBlob) {
+          const options = {
+            maxSizeMB: 0.2,
+            maxWidthOrHeight: 800,
+            useWebWorker: true,
+          };
+          return await imageCompression(imageBlob, options);
+        }
+
+        // Show the cropped image
+        function showCroppedImage(blob) {
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            uploadedImage.src = e.target.result;
+            uploadedImage.classList.add("show");
+            uploadIcon.style.display = "none";
+          };
+          reader.readAsDataURL(blob);
+        }
+      });
+    </script>
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+      var Tawk_API = Tawk_API || {},
+        Tawk_LoadStart = new Date();
+      (function () {
+        var s1 = document.createElement("script"),
+          s0 = document.getElementsByTagName("script")[0];
+        s1.async = true;
+        s1.src = "https://embed.tawk.to/67a60c4e825083258e11bbd7/1ijga05k9";
+        s1.charset = "UTF-8";
+        s1.setAttribute("crossorigin", "*");
+        s0.parentNode.insertBefore(s1, s0);
+      })();
+    </script>
+    <!--End of Tawk.to Script-->
+  </body>
+</html>

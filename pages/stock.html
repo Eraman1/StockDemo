@@ -1,0 +1,3965 @@
+<!--
+=========================================================
+* Material Dashboard 2 - v3.0.0
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/material-dashboard
+* Copyright 2021 Creative Tim (https://www.creative-tim.com)
+* Licensed under MIT (https://www.creative-tim.com/license)
+* Coded by Creative Tim
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <link
+      rel="icon"
+      type="image/png"
+      href="/assets/img/favicon_io/favicon-32x32.png"
+    />
+    <title>Stock It Inventory</title>
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> -->
+
+    <!--     Fonts and icons     -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700"
+    />
+    <!-- Nucleo Icons -->
+    <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
+    <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+    <!-- Font Awesome Icons -->
+    <script
+      src="https://kit.fontawesome.com/42d5adcbca.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Material Icons -->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons+Round"
+      rel="stylesheet"
+    />
+    <!-- CSS Files -->
+    <link
+      id="pagestyle"
+      href="../assets/css/material-dashboard.css?v=3.0.0"
+      rel="stylesheet"
+    />
+    <style>
+      /* for taking image */
+      .upload-container {
+        text-align: center;
+      }
+
+      .upload-icon {
+        width: 50px;
+        height: 50px;
+        border: 2px solid gray;
+        border-radius: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        position: relative;
+      }
+
+      .upload-icon img {
+        width: 50%;
+        height: 50%;
+      }
+
+      #imageUpload {
+        display: none;
+      }
+
+      #uploadedImage {
+        width: 50px;
+        height: 50px;
+        border: 2px solid gray;
+        border-radius: 5px;
+        object-fit: cover;
+        display: none;
+        cursor: pointer;
+      }
+
+      #uploadedImage.show {
+        display: block;
+      }
+
+      .input-container {
+        display: flex;
+        align-items: center;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 8px;
+        height: 37px;
+      }
+
+      .rupee-icon {
+        margin-right: 8px;
+      }
+
+      .rupee-icon::before {
+        content: "\20B9";
+        /* Unicode for Indian Rupee symbol */
+        font-size: 20px;
+      }
+
+      .input-field {
+        flex: 1;
+        border: none;
+        outline: none;
+        font-size: 13px;
+        width: 100%;
+      }
+
+      .badge {
+        width: 40px;
+      }
+
+      /* for calender */
+      .input-container {
+        position: relative;
+      }
+
+      form {
+        max-width: 400px;
+        /* background-color: #fff; */
+        /* padding: 10px; */
+        /* border-radius: 8px; */
+        /* box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); */
+      }
+
+      label {
+        font-weight: bold;
+        margin-bottom: 10px;
+        display: inline-block;
+      }
+
+      input[type="text"] {
+        background: none;
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        height: 37px;
+      }
+
+      input[type="text"]:focus {
+        outline: none;
+        border-color: #007bff;
+        box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+      }
+
+      .flatpickr-calendar {
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+
+      .form-select {
+        padding-left: 8px;
+        height: 37px;
+      }
+
+      .form-control {
+        height: 37px;
+      }
+
+      .form-control:focus {
+        outline: none;
+        border-color: #007bff;
+        box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+      }
+
+      .form-select:focus {
+        outline: none;
+        border-color: #007bff;
+        box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+      }
+
+      .modal-body {
+        position: relative;
+        flex: 1 1 auto;
+        /* padding: 1rem 2.5rem 1rem; */
+      }
+
+      .modal-header .btn-close {
+        /* Custom styles for the close button */
+        font-size: 1rem;
+        /* Adjust the font size */
+        color: #000 !important;
+        /* Close button color */
+        /* Add any other necessary styles */
+      }
+
+      .modal-header {
+        padding: 1rem 1rem 0.3rem 1rem;
+      }
+      /* tr:hover {background-color: coral;} */
+
+      .modal-backdrop.show {
+        opacity: 0.5;
+      }
+      .reduce-opacity {
+        opacity: 0.5;
+      }
+
+      .form-check-input:checked {
+        background-color: green;
+      }
+    </style>
+  </head>
+
+  <body class="g-sidenav-show bg-gray-200">
+    <aside
+      class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 bg-gradient-dark"
+      id="sidenav-main"
+    >
+      <div class="sidenav-header">
+        <i
+          class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
+          aria-hidden="true"
+          id="iconSidenav"
+        ></i>
+        <a
+          class="navbar-brand m-0"
+          href=" https://demos.creative-tim.com/material-dashboard/pages/dashboard "
+          target="_blank"
+        >
+          <img
+            src="/assets/img/icons/flags/stockit.png"
+            class="navbar-brand-img h-100"
+            alt="main_logo"
+          />
+          <span class="ms-1 font-weight-bold text-white"
+            >Stock it Inventory</span
+          >
+        </a>
+      </div>
+      <hr class="horizontal light mt-0 mb-2" />
+      <div
+        class="collapse navbar-collapse w-auto max-height-vh-100"
+        id="sidenav-collapse-main"
+      >
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link text-white" href="../index.html">
+              <div
+                class="text-white text-center me-2 d-flex align-items-center justify-content-center"
+              >
+                <i class="material-icons opacity-10">home</i>
+              </div>
+              <span class="nav-link-text ms-1">Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link text-white active bg-gradient-info"
+              href="stock.html"
+            >
+              <div
+                class="text-white text-center me-2 d-flex align-items-center justify-content-center"
+              >
+                <i class="material-icons opacity-10">store</i>
+              </div>
+              <span class="nav-link-text ms-1">Stock</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="billing.html">
+              <div
+                class="text-white text-center me-2 d-flex align-items-center justify-content-center"
+              >
+                <i class="material-icons opacity-10">receipt_long</i>
+              </div>
+              <span class="nav-link-text ms-1">Bill/Entry</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="party.html">
+              <div
+                class="text-white text-center me-2 d-flex align-items-center justify-content-center"
+              >
+                <i class="material-icons opacity-10">people</i>
+              </div>
+              <span class="nav-link-text ms-1">Party</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="transaction.html">
+              <div
+                class="text-white text-center me-2 d-flex align-items-center justify-content-center"
+              >
+                <i class="material-icons opacity-10">import_export</i>
+              </div>
+              <span class="nav-link-text ms-1">Transaction</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="rateList.html">
+              <div
+                class="text-white text-center me-2 d-flex align-items-center justify-content-center"
+              >
+                <i class="material-icons opacity-10">assignment</i>
+              </div>
+              <span class="nav-link-text ms-1">Rate List</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="report.html">
+              <div
+                class="text-white text-center me-2 d-flex align-items-center justify-content-center"
+              >
+                <i class="material-icons opacity-10">report</i>
+              </div>
+              <span class="nav-link-text ms-1">Report</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="./notifications.html">
+              <div
+                class="text-white text-center me-2 d-flex align-items-center justify-content-center"
+              >
+                <i class="material-icons opacity-10">notifications</i>
+              </div>
+              <span class="nav-link-text ms-1">Notifications</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="./tutorial.html">
+              <div
+                class="text-white text-center me-2 d-flex align-items-center justify-content-center"
+              >
+                <i class="material-icons opacity-10">smart_display</i>
+              </div>
+              <span class="nav-link-text ms-1">Tutorial</span>
+            </a>
+          </li>
+          <li class="nav-item mt-3">
+            <h6
+              class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8"
+            >
+              Account
+            </h6>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="./profile.html">
+              <div
+                class="text-white text-center me-2 d-flex align-items-center justify-content-center"
+              >
+                <i class="material-icons opacity-10">person</i>
+              </div>
+              <span class="nav-link-text ms-1">Profile</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="./sign-in.html">
+              <div
+                class="text-white text-center me-2 d-flex align-items-center justify-content-center"
+              >
+                <i class="material-icons opacity-10">logout</i>
+              </div>
+              <span class="nav-link-text ms-1">log out</span>
+            </a>
+          </li>
+          <!-- <li class="nav-item">
+        <a class="nav-link text-white " href="./pages/sign-up.html">
+          <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+            <i class="material-icons opacity-10">assignment</i>
+          </div>
+          <span class="nav-link-text ms-1">Sign Up</span>
+        </a>
+      </li> -->
+          <li class="nav-item mt-3">
+            <h6
+              class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8"
+            >
+              Settings
+            </h6>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="./memberManagement.html">
+              <div
+                class="text-white text-center me-2 d-flex align-items-center justify-content-center"
+              >
+                <i class="material-icons opacity-10">manage_accounts</i>
+              </div>
+              <span class="nav-link-text ms-1">Member management</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="./categoryManagement.html">
+              <div
+                class="text-white text-center me-2 d-flex align-items-center justify-content-center"
+              >
+                <i class="material-icons opacity-10">category</i>
+              </div>
+              <span class="nav-link-text ms-1">Category management</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="./StoreManagement.html">
+              <div
+                class="text-white text-center me-2 d-flex align-items-center justify-content-center"
+              >
+                <i class="material-icons opacity-10">settings_applications</i>
+              </div>
+              <span class="nav-link-text ms-1">Store management</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="sidenav-footer position-absolute w-100 bottom-0">
+        <div class="mx-3">
+          <a
+            class="btn bg-gradient-info mt-4 w-100"
+            href="https://www.creative-tim.com/product/material-dashboard-pro?ref=sidebarfree"
+            type="button"
+            >Upgrade to prime</a
+          >
+        </div>
+      </div>
+    </aside>
+    <main
+      class="main-content position-relative max-height-vh-100 h-100 border-radius-lg"
+    >
+      <!-- Navbar -->
+      <nav
+        class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl"
+        id="navbarBlur"
+        navbar-scroll="true"
+      >
+        <div class="container-fluid py-1 px-3">
+          <nav aria-label="breadcrumb">
+            <!-- <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
+            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Tables</li>
+          </ol> -->
+            <!-- <form class="">
+            <input type="text" id="birthdate" name="birthdate" placeholder="&#x1F4C5; Select Date">
+
+          </form> -->
+            <div class="input-group input-group-outline">
+              <label class="form-label">&#x1F4C5; Select Date</label>
+              <input
+                type="text"
+                id="birthdate"
+                name="birthdate"
+                class="form-control"
+              />
+            </div>
+          </nav>
+          <div
+            class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4"
+            id="navbar"
+          >
+            <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+              <div class="input-group input-group-outline">
+                <label class="form-label">Search</label>
+                <input type="text" class="form-control" />
+              </div>
+            </div>
+            <ul class="navbar-nav justify-content-end">
+              <li class="nav-item d-flex align-items-center">
+                <a
+                  href="javascript:;"
+                  class="nav-link text-body font-weight-bold px-0"
+                >
+                  <i class="fa fa-user me-sm-1"></i>
+                  <span class="d-sm-inline d-none">Sign In</span>
+                </a>
+              </li>
+              <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
+                <a
+                  href="javascript:;"
+                  class="nav-link text-body p-0"
+                  id="iconNavbarSidenav"
+                >
+                  <div class="sidenav-toggler-inner">
+                    <i class="sidenav-toggler-line"></i>
+                    <i class="sidenav-toggler-line"></i>
+                    <i class="sidenav-toggler-line"></i>
+                  </div>
+                </a>
+              </li>
+              <li class="nav-item px-3 d-flex align-items-center">
+                <a href="javascript:;" class="nav-link text-body p-0">
+                  <i
+                    class="fa fa-cog fixed-plugin-button-nav cursor-pointer"
+                  ></i>
+                </a>
+              </li>
+              <li class="nav-item dropdown pe-2 d-flex align-items-center">
+                <a
+                  href="javascript:;"
+                  class="nav-link text-body p-0"
+                  id="dropdownMenuButton"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <i class="fa fa-bell cursor-pointer"></i>
+                </a>
+                <ul
+                  class="dropdown-menu dropdown-menu-end px-2 py-3 me-sm-n4"
+                  aria-labelledby="dropdownMenuButton"
+                >
+                  <li class="mb-2">
+                    <a
+                      class="dropdown-item border-radius-md"
+                      href="javascript:;"
+                    >
+                      <div class="d-flex py-1">
+                        <div class="my-auto">
+                          <img
+                            src="../assets/img/team-2.jpg"
+                            class="avatar avatar-sm me-3"
+                          />
+                        </div>
+                        <div class="d-flex flex-column justify-content-center">
+                          <h6 class="text-sm font-weight-normal mb-1">
+                            <span class="font-weight-bold">New message</span>
+                            from Laur
+                          </h6>
+                          <p class="text-xs text-secondary mb-0">
+                            <i class="fa fa-clock me-1"></i>
+                            13 minutes ago
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li class="mb-2">
+                    <a
+                      class="dropdown-item border-radius-md"
+                      href="javascript:;"
+                    >
+                      <div class="d-flex py-1">
+                        <div class="my-auto">
+                          <img
+                            src="../assets/img/small-logos/logo-spotify.svg"
+                            class="avatar avatar-sm bg-gradient-dark me-3"
+                          />
+                        </div>
+                        <div class="d-flex flex-column justify-content-center">
+                          <h6 class="text-sm font-weight-normal mb-1">
+                            <span class="font-weight-bold">New album</span> by
+                            Travis Scott
+                          </h6>
+                          <p class="text-xs text-secondary mb-0">
+                            <i class="fa fa-clock me-1"></i>
+                            1 day
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item border-radius-md"
+                      href="javascript:;"
+                    >
+                      <div class="d-flex py-1">
+                        <div
+                          class="avatar avatar-sm bg-gradient-secondary me-3 my-auto"
+                        >
+                          <svg
+                            width="12px"
+                            height="12px"
+                            viewBox="0 0 43 36"
+                            version="1.1"
+                            xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                          >
+                            <title>credit-card</title>
+                            <g
+                              stroke="none"
+                              stroke-width="1"
+                              fill="none"
+                              fill-rule="evenodd"
+                            >
+                              <g
+                                transform="translate(-2169.000000, -745.000000)"
+                                fill="#FFFFFF"
+                                fill-rule="nonzero"
+                              >
+                                <g
+                                  transform="translate(1716.000000, 291.000000)"
+                                >
+                                  <g
+                                    transform="translate(453.000000, 454.000000)"
+                                  >
+                                    <path
+                                      class="color-background"
+                                      d="M43,10.7482083 L43,3.58333333 C43,1.60354167 41.3964583,0 39.4166667,0 L3.58333333,0 C1.60354167,0 0,1.60354167 0,3.58333333 L0,10.7482083 L43,10.7482083 Z"
+                                      opacity="0.593633743"
+                                    ></path>
+                                    <path
+                                      class="color-background"
+                                      d="M0,16.125 L0,32.25 C0,34.2297917 1.60354167,35.8333333 3.58333333,35.8333333 L39.4166667,35.8333333 C41.3964583,35.8333333 43,34.2297917 43,32.25 L43,16.125 L0,16.125 Z M19.7083333,26.875 L7.16666667,26.875 L7.16666667,23.2916667 L19.7083333,23.2916667 L19.7083333,26.875 Z M35.8333333,26.875 L28.6666667,26.875 L28.6666667,23.2916667 L35.8333333,23.2916667 L35.8333333,26.875 Z"
+                                    ></path>
+                                  </g>
+                                </g>
+                              </g>
+                            </g>
+                          </svg>
+                        </div>
+                        <div class="d-flex flex-column justify-content-center">
+                          <h6 class="text-sm font-weight-normal mb-1">
+                            Payment successfully completed
+                          </h6>
+                          <p class="text-xs text-secondary mb-0">
+                            <i class="fa fa-clock me-1"></i>
+                            2 days
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <!-- End Navbar -->
+      <div class="container-fluid py-2">
+        <div id="main_page" style="display: block">
+          <div class="row">
+            <div
+              class="col-xl-4 col-sm-6 mb-xl-0 mb-4 cursor-pointer"
+              data-bs-toggle="modal"
+              data-bs-target="#detailsModal"
+            >
+              <div class="card ps-2">
+                <div class="card-header p-1">
+                  <!-- <div class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
+                <i class="material-icons opacity-10">person</i>
+              </div> -->
+                  <div class="text-start pt-1">
+                    <p class="text-sm mb-0 text-capitalize">Total Product</p>
+                    <h4
+                      class="mb-0 font-weight-normal"
+                      style="font-size: 1.2rem"
+                    >
+                      530
+                    </h4>
+                  </div>
+                </div>
+                <hr class="dark horizontal my-0" />
+                <div class="card-footer p-1">
+                  <p class="mb-0">
+                    <span class="text-success text-sm font-weight-bolder"
+                      >+55 </span
+                    >than lask week
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div
+              class="col-xl-4 col-sm-6 mb-xl-0 mb-4 cursor-pointer"
+              data-bs-toggle="modal"
+              data-bs-target="#detailsModal"
+            >
+              <div class="card ps-2">
+                <div class="card-header p-1">
+                  <!-- <div class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
+                <i class="material-icons opacity-10">person</i>
+              </div> -->
+                  <div class="text-start pt-1">
+                    <p class="text-sm mb-0 text-capitalize">Total Product</p>
+                    <h4
+                      class="mb-0 font-weight-normal"
+                      style="font-size: 1.2rem"
+                    >
+                      530
+                    </h4>
+                  </div>
+                </div>
+                <hr class="dark horizontal my-0" />
+                <div class="card-footer p-1">
+                  <p class="mb-0">
+                    <span class="text-success text-sm font-weight-bolder"
+                      >+55 </span
+                    >than lask week
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div
+              class="col-xl-4 col-sm-6 cursor-pointer"
+              data-bs-toggle="modal"
+              data-bs-target="#detailsModal"
+            >
+              <div class="card ps-2">
+                <div class="card-header p-1">
+                  <!-- <div class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
+                <i class="material-icons opacity-10">person</i>
+              </div> -->
+                  <div class="text-start pt-1">
+                    <p class="text-sm mb-0 text-capitalize">Total Product</p>
+                    <h4
+                      class="mb-0 font-weight-normal"
+                      style="font-size: 1.2rem"
+                    >
+                      530
+                    </h4>
+                  </div>
+                </div>
+                <hr class="dark horizontal my-0" />
+                <div class="card-footer p-1">
+                  <p class="mb-0">
+                    <span class="text-success text-sm font-weight-bolder"
+                      >+55 </span
+                    >than lask week
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-4">
+            <div class="col-12">
+              <div class="card my-4">
+                <div
+                  class="card-header p-0 position-relative mt-n4 mx-3 z-index-2"
+                >
+                  <div class="bg-dark border-radius-lg pt-4 pb-3 row">
+                    <div class="col-3">
+                      <h6 class="text-white text-capitalize ps-3 d-inline">
+                        Product Details
+                      </h6>
+                    </div>
+
+                    <div class="col-9">
+                      <div class="row">
+                        <div class="col-lg-3">
+                          <button
+                            type="button"
+                            class="btn btn-outline-white"
+                            data-bs-toggle="modal"
+                            data-bs-target="#staticBackdrop"
+                          >
+                            +Add Product
+                          </button>
+                          <!-- <a class="btn bg-gradient-info w-100 shadow-lg" href="" type="button" data-bs-toggle="modal"
+                        data-bs-target="#staticBackdrop">+ Add Product</a> -->
+                          <!-- add product model -->
+                          <!-- add product model end -->
+                        </div>
+                        <div class="col-2">
+                          <button
+                            type="button"
+                            class="btn btn-outline-white"
+                            data-bs-toggle="modal"
+                            data-bs-target="#inbutton"
+                          >
+                            IN
+                          </button>
+                          <!-- <a class="btn bg-gradient-info w-100 shadow-lg" href="" type="button" data-bs-toggle="modal"
+                        data-bs-target="#inbutton">IN</a> -->
+                        </div>
+                        <div class="col-2">
+                          <button
+                            type="button"
+                            class="btn btn-outline-white"
+                            data-bs-toggle="modal"
+                            data-bs-target="#outbutton"
+                          >
+                            OUT
+                          </button>
+                          <!-- <a class="btn bg-gradient-info w-100 shadow-lg" href="" type="button" data-bs-toggle="modal"
+                        data-bs-target="#outbutton">OUT</a> -->
+                        </div>
+                        <div class="col-2">
+                          <!-- <div class="dropdown">
+                        <button class="btn bg-dark w-100 shadow-lg dropdown-toggle" type="button"
+                          id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Category
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                          <a class="dropdown-item" href="#">Action</a>
+                          <a class="dropdown-item" href="#">Another action</a>
+                          <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                      </div> -->
+                          <div class="dropdown">
+                            <button
+                              class="btn btn-outline-white dropdown-toggle"
+                              type="button"
+                              id="dropdownMenuButton1"
+                              data-bs-toggle="dropdown"
+                              aria-expanded="false"
+                            >
+                              filter
+                            </button>
+                            <ul
+                              class="dropdown-menu"
+                              aria-labelledby="dropdownMenuButton1"
+                            >
+                              <li>
+                                <a class="dropdown-item" href="#">Action</a>
+                              </li>
+                              <li>
+                                <a class="dropdown-item" href="#"
+                                  >Another action</a
+                                >
+                              </li>
+                              <li>
+                                <a class="dropdown-item" href="#"
+                                  >Something else here</a
+                                >
+                              </li>
+                            </ul>
+                          </div>
+                          <!-- <button type="button" class="btn btn-outline-white">Filter</button> -->
+                        </div>
+                        <div class="col-2">
+                          <select
+                            class="form-select"
+                            style="background-color: #fff"
+                            id="gstRateType"
+                            name="gstRateType"
+                            required
+                          >
+                            <option value="default">Category</option>
+                            <option value="store1">Store1</option>
+                            <option value="store2">Store2</option>
+                            <option value="store3">Store3</option>
+                            <!-- Add more options as needed -->
+                          </select>
+                        </div>
+
+                        <div class="col-1">
+                          <p
+                            class="text-sm text-secondary text-white cursor-pointer"
+                            id="button_purchase"
+                          >
+                            <i
+                              class="fa fa-download ms-2"
+                              aria-hidden="true"
+                            ></i>
+                            Report
+                          </p>
+                        </div>
+                      </div>
+
+                      <!-- <h6 class="text-white text-capitalize ps-3 d-inline">Authors table</h6>
+                <div class="input-group input-group-outline">
+                  <label class="form-label">Type here...</label>
+                  <input type="text" class="form-control">
+                    <a class="btn bg-dark mt-4 w-100" href="" type="button">+ Add Product</a>
+                </div> -->
+                    </div>
+                  </div>
+                </div>
+                <div class="card-body px-0 pb-2">
+                  <div class="table-responsive p-0">
+                    <table class="table align-items-center mb-0">
+                      <thead>
+                        <tr>
+                          <th
+                            class="text-secondary text-xxs font-weight-bolder opacity-7"
+                          >
+                            Product Name
+                          </th>
+                          <th
+                            class="text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
+                          >
+                            Opening Stock
+                          </th>
+                          <th
+                            class="text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
+                          >
+                            Today IN
+                          </th>
+                          <th
+                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
+                          >
+                            Today Out
+                          </th>
+                          <th
+                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
+                          >
+                            Available Stock
+                          </th>
+                          <th
+                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                          >
+                            IN/OUT
+                          </th>
+                          <th
+                            class="text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
+                          >
+                            Action
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>
+                            <div class="d-flex px-2 py-1">
+                              <div>
+                                <img
+                                  src="../assets/img/team-2.jpg"
+                                  class="avatar avatar-sm me-3 border-radius-lg"
+                                  alt="user1"
+                                />
+                              </div>
+                              <div
+                                class="d-flex flex-column justify-content-center"
+                              >
+                                <h6 class="mb-0 text-sm">Product-1</h6>
+                                <p class="text-xs text-secondary mb-0">
+                                  24/12/08
+                                </p>
+                              </div>
+                            </div>
+                          </td>
+                          <td>
+                            <p class="text-xs font-weight-bold mb-0">500</p>
+                            <!-- <p class="text-xs text-secondary mb-0">Developer</p> -->
+                          </td>
+                          <td>
+                            <p class="text-xs font-weight-bold mb-0">200</p>
+                            <!-- <p class="text-xs text-secondary mb-0">Developer</p> -->
+                          </td>
+                          <td>
+                            <p class="text-xs font-weight-bold mb-0">100</p>
+                            <!-- <p class="text-xs text-secondary mb-0">Developer</p> -->
+                          </td>
+                          <td>
+                            <p class="text-xs font-weight-bold mb-0">100</p>
+                            <!-- <p class="text-xs text-secondary mb-0">Developer</p> -->
+                          </td>
+                          <td class="align-middle text-center text-sm">
+                            <span class="badge badge-sm bg-gradient-success"
+                              >IN</span
+                            >
+                            <span class="badge badge-sm bg-gradient-secondary"
+                              >OUT</span
+                            >
+                          </td>
+                          <td class="align-middle">
+                            <!-- <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                          Edit
+                        </a> -->
+                            <button
+                              class="btn btn-link text-secondary mb-0"
+                              id="dropdownMenuButtonForEdit"
+                              data-bs-toggle="dropdown"
+                              aria-expanded="false"
+                            >
+                              <i class="fa fa-ellipsis-v text-xs"></i>
+                            </button>
+                            <ul
+                              class="dropdown-menu dropdown-menu-end px-2 py-2 me-sm-n2 shadow-lg p-3 mb-5 bg-body rounded"
+                              aria-labelledby="dropdownMenuButtonForEdit"
+                            >
+                              <li class="mb-2">
+                                <a
+                                  class="dropdown-item border-radius-md"
+                                  href="javascript:;"
+                                  data-bs-toggle="modal"
+                                  data-bs-target="#viewDetails"
+                                >
+                                  <div class="d-flex py-1">
+                                    <div class="my-auto">
+                                      <i class="material-icons me-3"
+                                        >visibility</i
+                                      >
+                                    </div>
+                                    <div
+                                      class="d-flex flex-column justify-content-center"
+                                    >
+                                      <h6
+                                        class="text-sm font-weight-normal mb-1"
+                                      >
+                                        <span class="font-weight-bold"
+                                          >View Details</span
+                                        >
+                                      </h6>
+                                      <!-- <p class="text-xs text-secondary mb-0">
+                                    <i class="fa fa-clock me-1"></i>
+                                    13 minutes ago
+                                  </p> -->
+                                    </div>
+                                  </div>
+                                </a>
+                              </li>
+                              <li class="mb-2">
+                                <a
+                                  class="dropdown-item border-radius-md"
+                                  href="javascript:;"
+                                >
+                                  <div class="d-flex py-1">
+                                    <div class="my-auto">
+                                      <i class="material-icons me-3">edit</i>
+                                    </div>
+                                    <div
+                                      class="d-flex flex-column justify-content-center"
+                                    >
+                                      <h6
+                                        class="text-sm font-weight-normal mb-1"
+                                      >
+                                        <span class="font-weight-bold"
+                                          >Edit</span
+                                        >
+                                      </h6>
+                                      <!-- <p class="text-xs text-secondary mb-0">
+                                    <i class="fa fa-clock me-1"></i>
+                                    13 minutes ago
+                                  </p> -->
+                                    </div>
+                                  </div>
+                                </a>
+                              </li>
+                              <li class="mb-2">
+                                <a
+                                  class="dropdown-item border-radius-md"
+                                  href="javascript:;"
+                                >
+                                  <div class="d-flex py-1">
+                                    <div class="my-auto">
+                                      <i class="material-icons me-3">delete</i>
+                                    </div>
+                                    <div
+                                      class="d-flex flex-column justify-content-center"
+                                    >
+                                      <h6
+                                        class="text-sm font-weight-normal mb-1"
+                                      >
+                                        <span class="font-weight-bold"
+                                          >Delete</span
+                                        >
+                                      </h6>
+                                      <!-- <p class="text-xs text-secondary mb-0">
+                                    <i class="fa fa-clock me-1"></i>
+                                    1 day
+                                  </p> -->
+                                    </div>
+                                  </div>
+                                </a>
+                              </li>
+                            </ul>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <div class="d-flex px-2 py-1">
+                              <div>
+                                <img
+                                  src="../assets/img/team-3.jpg"
+                                  class="avatar avatar-sm me-3 border-radius-lg"
+                                  alt="user2"
+                                />
+                              </div>
+                              <div
+                                class="d-flex flex-column justify-content-center"
+                              >
+                                <h6 class="mb-0 text-sm">Product-2</h6>
+                                <p class="text-xs text-secondary mb-0">
+                                  24/12/08
+                                </p>
+                              </div>
+                            </div>
+                          </td>
+                          <td>
+                            <p class="text-xs font-weight-bold mb-0">500</p>
+                            <!-- <p class="text-xs text-secondary mb-0">Developer</p> -->
+                          </td>
+                          <td>
+                            <p class="text-xs font-weight-bold mb-0">200</p>
+                            <!-- <p class="text-xs text-secondary mb-0">Developer</p> -->
+                          </td>
+                          <td>
+                            <p class="text-xs font-weight-bold mb-0">100</p>
+                            <!-- <p class="text-xs text-secondary mb-0">Developer</p> -->
+                          </td>
+                          <td>
+                            <p class="text-xs font-weight-bold mb-0">500</p>
+                            <!-- <p class="text-xs text-secondary mb-0">Developer</p> -->
+                          </td>
+                          <td class="align-middle text-center text-sm">
+                            <span class="badge badge-sm bg-gradient-success"
+                              >IN</span
+                            >
+                            <span class="badge badge-sm bg-gradient-secondary"
+                              >OUT</span
+                            >
+                          </td>
+
+                          <td class="align-middle">
+                            <!-- <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                          Edit
+                        </a> -->
+                            <button class="btn btn-link text-secondary mb-0">
+                              <i class="fa fa-ellipsis-v text-xs"></i>
+                            </button>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <div class="d-flex px-2 py-1">
+                              <div>
+                                <img
+                                  src="../assets/img/team-4.jpg"
+                                  class="avatar avatar-sm me-3 border-radius-lg"
+                                  alt="user3"
+                                />
+                              </div>
+                              <div
+                                class="d-flex flex-column justify-content-center"
+                              >
+                                <h6 class="mb-0 text-sm">Product-3</h6>
+                                <p class="text-xs text-secondary mb-0">
+                                  24/12/08
+                                </p>
+                              </div>
+                            </div>
+                          </td>
+                          <td>
+                            <p class="text-xs font-weight-bold mb-0">500</p>
+                            <!-- <p class="text-xs text-secondary mb-0">Developer</p> -->
+                          </td>
+                          <td>
+                            <p class="text-xs font-weight-bold mb-0">200</p>
+                            <!-- <p class="text-xs text-secondary mb-0">Developer</p> -->
+                          </td>
+                          <td>
+                            <p class="text-xs font-weight-bold mb-0">100</p>
+                            <!-- <p class="text-xs text-secondary mb-0">Developer</p> -->
+                          </td>
+                          <td>
+                            <p class="text-xs font-weight-bold mb-0">500</p>
+                            <!-- <p class="text-xs text-secondary mb-0">Developer</p> -->
+                          </td>
+                          <td class="align-middle text-center text-sm">
+                            <span class="badge badge-sm bg-gradient-success"
+                              >IN</span
+                            >
+                            <span class="badge badge-sm bg-gradient-secondary"
+                              >OUT</span
+                            >
+                          </td>
+                          <td class="align-middle">
+                            <!-- <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                          Edit
+                        </a> -->
+                            <button class="btn btn-link text-secondary mb-0">
+                              <i class="fa fa-ellipsis-v text-xs"></i>
+                            </button>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <div class="d-flex px-2 py-1">
+                              <div>
+                                <img
+                                  src="../assets/img/team-3.jpg"
+                                  class="avatar avatar-sm me-3 border-radius-lg"
+                                  alt="user4"
+                                />
+                              </div>
+                              <div
+                                class="d-flex flex-column justify-content-center"
+                              >
+                                <h6 class="mb-0 text-sm">Product-4</h6>
+                                <p class="text-xs text-secondary mb-0">
+                                  24/12/08
+                                </p>
+                              </div>
+                            </div>
+                          </td>
+                          <td>
+                            <p class="text-xs font-weight-bold mb-0">500</p>
+                            <!-- <p class="text-xs text-secondary mb-0">Developer</p> -->
+                          </td>
+                          <td>
+                            <p class="text-xs font-weight-bold mb-0">200</p>
+                            <!-- <p class="text-xs text-secondary mb-0">Developer</p> -->
+                          </td>
+                          <td>
+                            <p class="text-xs font-weight-bold mb-0">100</p>
+                            <!-- <p class="text-xs text-secondary mb-0">Developer</p> -->
+                          </td>
+                          <td>
+                            <p class="text-xs font-weight-bold mb-0">500</p>
+                            <!-- <p class="text-xs text-secondary mb-0">Developer</p> -->
+                          </td>
+                          <td class="align-middle text-center text-sm">
+                            <span class="badge badge-sm bg-gradient-success"
+                              >IN</span
+                            >
+                            <span class="badge badge-sm bg-gradient-secondary"
+                              >OUT</span
+                            >
+                          </td>
+                          <td class="align-middle">
+                            <!-- <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                          Edit
+                        </a> -->
+                            <button class="btn btn-link text-secondary mb-0">
+                              <i class="fa fa-ellipsis-v text-xs"></i>
+                            </button>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <div class="d-flex px-2 py-1">
+                              <div>
+                                <img
+                                  src="../assets/img/team-2.jpg"
+                                  class="avatar avatar-sm me-3 border-radius-lg"
+                                  alt="user5"
+                                />
+                              </div>
+                              <div
+                                class="d-flex flex-column justify-content-center"
+                              >
+                                <h6 class="mb-0 text-sm">Product-5</h6>
+                                <p class="text-xs text-secondary mb-0">
+                                  24/12/08
+                                </p>
+                              </div>
+                            </div>
+                          </td>
+                          <td>
+                            <p class="text-xs font-weight-bold mb-0">500</p>
+                            <!-- <p class="text-xs text-secondary mb-0">Developer</p> -->
+                          </td>
+                          <td>
+                            <p class="text-xs font-weight-bold mb-0">200</p>
+                            <!-- <p class="text-xs text-secondary mb-0">Developer</p> -->
+                          </td>
+                          <td>
+                            <p class="text-xs font-weight-bold mb-0">100</p>
+                            <!-- <p class="text-xs text-secondary mb-0">Developer</p> -->
+                          </td>
+                          <td>
+                            <p class="text-xs font-weight-bold mb-0">500</p>
+                            <!-- <p class="text-xs text-secondary mb-0">Developer</p> -->
+                          </td>
+                          <td class="align-middle text-center text-sm">
+                            <span class="badge badge-sm bg-gradient-success"
+                              >IN</span
+                            >
+                            <span class="badge badge-sm bg-gradient-secondary"
+                              >OUT</span
+                            >
+                          </td>
+                          <td class="align-middle">
+                            <!-- <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                          Edit
+                        </a> -->
+                            <button class="btn btn-link text-secondary mb-0">
+                              <i class="fa fa-ellipsis-v text-xs"></i>
+                            </button>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <div class="d-flex px-2 py-1">
+                              <div>
+                                <img
+                                  src="../assets/img/team-4.jpg"
+                                  class="avatar avatar-sm me-3 border-radius-lg"
+                                  alt="user6"
+                                />
+                              </div>
+                              <div
+                                class="d-flex flex-column justify-content-center"
+                              >
+                                <h6 class="mb-0 text-sm">Product-6</h6>
+                                <p class="text-xs text-secondary mb-0">
+                                  24/12/08
+                                </p>
+                              </div>
+                            </div>
+                          </td>
+                          <td>
+                            <p class="text-xs font-weight-bold mb-0">500</p>
+                            <!-- <p class="text-xs text-secondary mb-0">Developer</p> -->
+                          </td>
+                          <td>
+                            <p class="text-xs font-weight-bold mb-0">200</p>
+                            <!-- <p class="text-xs text-secondary mb-0">Developer</p> -->
+                          </td>
+                          <td>
+                            <p class="text-xs font-weight-bold mb-0">100</p>
+                            <!-- <p class="text-xs text-secondary mb-0">Developer</p> -->
+                          </td>
+                          <td>
+                            <p class="text-xs font-weight-bold mb-0">500</p>
+                            <!-- <p class="text-xs text-secondary mb-0">Developer</p> -->
+                          </td>
+                          <td class="align-middle text-center text-sm">
+                            <span class="badge badge-sm bg-gradient-success"
+                              >IN</span
+                            >
+                            <span class="badge badge-sm bg-gradient-secondary"
+                              >OUT</span
+                            >
+                          </td>
+                          <td class="align-middle">
+                            <!-- <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                          Edit
+                        </a> -->
+                            <button class="btn btn-link text-secondary mb-0">
+                              <i class="fa fa-ellipsis-v text-xs"></i>
+                            </button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <div class="card my-4">
+                <div
+                  class="card-header p-0 position-relative mt-n4 mx-3 z-index-2"
+                >
+                  <div class="bg-dark shadow-dark border-radius-lg pt-4 pb-3">
+                    <h6 class="text-white text-capitalize ps-3">
+                      Projects table
+                    </h6>
+                  </div>
+                </div>
+                <div class="card-body px-0 pb-2">
+                  <div class="table-responsive p-0">
+                    <table
+                      class="table align-items-center justify-content-center mb-0"
+                    >
+                      <thead>
+                        <tr>
+                          <th
+                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                          >
+                            Project
+                          </th>
+                          <th
+                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
+                          >
+                            Budget
+                          </th>
+                          <th
+                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
+                          >
+                            Status
+                          </th>
+                          <th
+                            class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2"
+                          >
+                            Completion
+                          </th>
+                          <th></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>
+                            <div class="d-flex px-2">
+                              <div>
+                                <img
+                                  src="../assets/img/small-logos/logo-asana.svg"
+                                  class="avatar avatar-sm rounded-circle me-2"
+                                  alt="spotify"
+                                />
+                              </div>
+                              <div class="my-auto">
+                                <h6 class="mb-0 text-sm">Asana</h6>
+                              </div>
+                            </div>
+                          </td>
+                          <td>
+                            <p class="text-sm font-weight-bold mb-0">$2,500</p>
+                          </td>
+                          <td>
+                            <span class="text-xs font-weight-bold"
+                              >working</span
+                            >
+                          </td>
+                          <td class="align-middle text-center">
+                            <div
+                              class="d-flex align-items-center justify-content-center"
+                            >
+                              <span class="me-2 text-xs font-weight-bold"
+                                >60%</span
+                              >
+                              <div>
+                                <div class="progress">
+                                  <div
+                                    class="progress-bar bg-gradient-info"
+                                    role="progressbar"
+                                    aria-valuenow="60"
+                                    aria-valuemin="0"
+                                    aria-valuemax="100"
+                                    style="width: 60%"
+                                  ></div>
+                                </div>
+                              </div>
+                            </div>
+                          </td>
+                          <td class="align-middle">
+                            <button class="btn btn-link text-secondary mb-0">
+                              <i class="fa fa-ellipsis-v text-xs"></i>
+                            </button>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <div class="d-flex px-2">
+                              <div>
+                                <img
+                                  src="../assets/img/small-logos/github.svg"
+                                  class="avatar avatar-sm rounded-circle me-2"
+                                  alt="invision"
+                                />
+                              </div>
+                              <div class="my-auto">
+                                <h6 class="mb-0 text-sm">Github</h6>
+                              </div>
+                            </div>
+                          </td>
+                          <td>
+                            <p class="text-sm font-weight-bold mb-0">$5,000</p>
+                          </td>
+                          <td>
+                            <span class="text-xs font-weight-bold">done</span>
+                          </td>
+                          <td class="align-middle text-center">
+                            <div
+                              class="d-flex align-items-center justify-content-center"
+                            >
+                              <span class="me-2 text-xs font-weight-bold"
+                                >100%</span
+                              >
+                              <div>
+                                <div class="progress">
+                                  <div
+                                    class="progress-bar bg-gradient-success"
+                                    role="progressbar"
+                                    aria-valuenow="100"
+                                    aria-valuemin="0"
+                                    aria-valuemax="100"
+                                    style="width: 100%"
+                                  ></div>
+                                </div>
+                              </div>
+                            </div>
+                          </td>
+                          <td class="align-middle">
+                            <button
+                              class="btn btn-link text-secondary mb-0"
+                              aria-haspopup="true"
+                              aria-expanded="false"
+                            >
+                              <i class="fa fa-ellipsis-v text-xs"></i>
+                            </button>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <div class="d-flex px-2">
+                              <div>
+                                <img
+                                  src="../assets/img/small-logos/logo-atlassian.svg"
+                                  class="avatar avatar-sm rounded-circle me-2"
+                                  alt="jira"
+                                />
+                              </div>
+                              <div class="my-auto">
+                                <h6 class="mb-0 text-sm">Atlassian</h6>
+                              </div>
+                            </div>
+                          </td>
+                          <td>
+                            <p class="text-sm font-weight-bold mb-0">$3,400</p>
+                          </td>
+                          <td>
+                            <span class="text-xs font-weight-bold"
+                              >canceled</span
+                            >
+                          </td>
+                          <td class="align-middle text-center">
+                            <div
+                              class="d-flex align-items-center justify-content-center"
+                            >
+                              <span class="me-2 text-xs font-weight-bold"
+                                >30%</span
+                              >
+                              <div>
+                                <div class="progress">
+                                  <div
+                                    class="progress-bar bg-gradient-danger"
+                                    role="progressbar"
+                                    aria-valuenow="30"
+                                    aria-valuemin="0"
+                                    aria-valuemax="30"
+                                    style="width: 30%"
+                                  ></div>
+                                </div>
+                              </div>
+                            </div>
+                          </td>
+                          <td class="align-middle">
+                            <button
+                              class="btn btn-link text-secondary mb-0"
+                              aria-haspopup="true"
+                              aria-expanded="false"
+                            >
+                              <i class="fa fa-ellipsis-v text-xs"></i>
+                            </button>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <div class="d-flex px-2">
+                              <div>
+                                <img
+                                  src="../assets/img/small-logos/bootstrap.svg"
+                                  class="avatar avatar-sm rounded-circle me-2"
+                                  alt="webdev"
+                                />
+                              </div>
+                              <div class="my-auto">
+                                <h6 class="mb-0 text-sm">Bootstrap</h6>
+                              </div>
+                            </div>
+                          </td>
+                          <td>
+                            <p class="text-sm font-weight-bold mb-0">$14,000</p>
+                          </td>
+                          <td>
+                            <span class="text-xs font-weight-bold"
+                              >working</span
+                            >
+                          </td>
+                          <td class="align-middle text-center">
+                            <div
+                              class="d-flex align-items-center justify-content-center"
+                            >
+                              <span class="me-2 text-xs font-weight-bold"
+                                >80%</span
+                              >
+                              <div>
+                                <div class="progress">
+                                  <div
+                                    class="progress-bar bg-gradient-info"
+                                    role="progressbar"
+                                    aria-valuenow="80"
+                                    aria-valuemin="0"
+                                    aria-valuemax="80"
+                                    style="width: 80%"
+                                  ></div>
+                                </div>
+                              </div>
+                            </div>
+                          </td>
+                          <td class="align-middle">
+                            <button
+                              class="btn btn-link text-secondary mb-0"
+                              aria-haspopup="true"
+                              aria-expanded="false"
+                            >
+                              <i class="fa fa-ellipsis-v text-xs"></i>
+                            </button>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <div class="d-flex px-2">
+                              <div>
+                                <img
+                                  src="../assets/img/small-logos/logo-slack.svg"
+                                  class="avatar avatar-sm rounded-circle me-2"
+                                  alt="slack"
+                                />
+                              </div>
+                              <div class="my-auto">
+                                <h6 class="mb-0 text-sm">Slack</h6>
+                              </div>
+                            </div>
+                          </td>
+                          <td>
+                            <p class="text-sm font-weight-bold mb-0">$1,000</p>
+                          </td>
+                          <td>
+                            <span class="text-xs font-weight-bold"
+                              >canceled</span
+                            >
+                          </td>
+                          <td class="align-middle text-center">
+                            <div
+                              class="d-flex align-items-center justify-content-center"
+                            >
+                              <span class="me-2 text-xs font-weight-bold"
+                                >0%</span
+                              >
+                              <div>
+                                <div class="progress">
+                                  <div
+                                    class="progress-bar bg-gradient-success"
+                                    role="progressbar"
+                                    aria-valuenow="0"
+                                    aria-valuemin="0"
+                                    aria-valuemax="0"
+                                    style="width: 0%"
+                                  ></div>
+                                </div>
+                              </div>
+                            </div>
+                          </td>
+                          <td class="align-middle">
+                            <button
+                              class="btn btn-link text-secondary mb-0"
+                              aria-haspopup="true"
+                              aria-expanded="false"
+                            >
+                              <i class="fa fa-ellipsis-v text-xs"></i>
+                            </button>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <div class="d-flex px-2">
+                              <div>
+                                <img
+                                  src="../assets/img/small-logos/devto.svg"
+                                  class="avatar avatar-sm rounded-circle me-2"
+                                  alt="xd"
+                                />
+                              </div>
+                              <div class="my-auto">
+                                <h6 class="mb-0 text-sm">Devto</h6>
+                              </div>
+                            </div>
+                          </td>
+                          <td>
+                            <p class="text-sm font-weight-bold mb-0">$2,300</p>
+                          </td>
+                          <td>
+                            <span class="text-xs font-weight-bold">done</span>
+                          </td>
+                          <td class="align-middle text-center">
+                            <div
+                              class="d-flex align-items-center justify-content-center"
+                            >
+                              <span class="me-2 text-xs font-weight-bold"
+                                >100%</span
+                              >
+                              <div>
+                                <div class="progress">
+                                  <div
+                                    class="progress-bar bg-gradient-success"
+                                    role="progressbar"
+                                    aria-valuenow="100"
+                                    aria-valuemin="0"
+                                    aria-valuemax="100"
+                                    style="width: 100%"
+                                  ></div>
+                                </div>
+                              </div>
+                            </div>
+                          </td>
+                          <td class="align-middle">
+                            <button
+                              class="btn btn-link text-secondary mb-0"
+                              aria-haspopup="true"
+                              aria-expanded="false"
+                            >
+                              <i class="fa fa-ellipsis-v text-xs"></i>
+                            </button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="footer py-4">
+            <div class="container-fluid">
+              <div class="row align-items-center justify-content-lg-between">
+                <div class="col-lg-6 mb-lg-0 mb-4">
+                  <div
+                    class="copyright text-center text-sm text-muted text-lg-start"
+                  >
+                    ©
+                    <script>
+                      document.write(new Date().getFullYear());
+                    </script>
+                    , made with <i class="fa fa-heart"></i> by
+                    <a
+                      href="https://www.creative-tim.com"
+                      class="font-weight-bold"
+                      target="_blank"
+                      >Creative Tim</a
+                    >
+                    for a better web.
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <ul
+                    class="nav nav-footer justify-content-center justify-content-lg-end"
+                  >
+                    <li class="nav-item">
+                      <a
+                        href="https://www.creative-tim.com"
+                        class="nav-link text-muted"
+                        target="_blank"
+                        >Creative Tim</a
+                      >
+                    </li>
+                    <li class="nav-item">
+                      <a
+                        href="https://www.creative-tim.com/presentation"
+                        class="nav-link text-muted"
+                        target="_blank"
+                        >About Us</a
+                      >
+                    </li>
+                    <li class="nav-item">
+                      <a
+                        href="https://www.creative-tim.com/blog"
+                        class="nav-link text-muted"
+                        target="_blank"
+                        >Blog</a
+                      >
+                    </li>
+                    <li class="nav-item">
+                      <a
+                        href="https://www.creative-tim.com/license"
+                        class="nav-link pe-0 text-muted"
+                        target="_blank"
+                        >License</a
+                      >
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </footer>
+        </div>
+        <div class="row mb-4" id="purchase" style="display: none">
+          <div class="col-lg-12 col-md-12 mb-md-0 mb-4">
+            <div class="card">
+              <div class="card-header pb-0">
+                <div class="row">
+                  <div class="col-lg-6 col-7">
+                    <div class="d-flex justify-content-start mt-0">
+                      <i
+                        class="material-icons opacity-10"
+                        id="button_main"
+                        style="
+                          font-size: 35px;
+                          cursor: pointer;
+                          margin-top: 0px;
+                        "
+                        >arrow_back</i
+                      >
+                      <!-- <button type="button" class="btn-close bg-dark" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                      <h4
+                        class="modal-title ms-4 mt-0"
+                        id="staticBackdropLabel"
+                      >
+                        Report
+                      </h4>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body px-0 pb-2">
+                <!-- Inline Radio Buttons -->
+                <div class="mb-3">
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="reportToggle"
+                      id="reportRadio1"
+                      data-target="report1"
+                      checked
+                    />
+                    <label class="form-check-label" for="reportRadio1"
+                      >Show Report 1</label
+                    >
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="reportToggle"
+                      id="reportRadio2"
+                      data-target="report2"
+                    />
+                    <label class="form-check-label" for="reportRadio2"
+                      >Show Report 2</label
+                    >
+                  </div>
+                </div>
+
+                <!-- Report 1 -->
+                <div id="report1" class="report" style="display: block">
+                  <p>This is the first report with a PDF:</p>
+                  <embed
+                    src="path/to/your-first-pdf.pdf"
+                    type="application/pdf"
+                    width="100%"
+                    height="400px"
+                  />
+                </div>
+
+                <!-- Report 2 -->
+                <div id="report2" class="report" style="display: none">
+                  <p>This is the second report with a PDF:</p>
+                  <embed
+                    src="path/to/your-second-pdf.pdf"
+                    type="application/pdf"
+                    width="100%"
+                    height="400px"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <div
+      class="modal fade"
+      id="staticBackdrop"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="staticBackdropLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <!-- Move close button to the left -->
+            <div class="d-flex justify-content-start mt-0">
+              <i
+                class="material-icons opacity-10"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+                style="font-size: 35px; cursor: pointer; margin-top: -5px"
+                >close</i
+              >
+              <!-- <button type="button" class="btn-close bg-dark" data-bs-dismiss="modal" aria-label="Close"></button> -->
+              <h5 class="modal-title ms-5 mt-0" id="staticBackdropLabel">
+                FIll the Product Details
+              </h5>
+            </div>
+
+            <div class="float-end mt-0">
+              <button type="submit" class="btn btn-primary me-1">
+                Save & Next
+              </button>
+              <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+          </div>
+          <div class="modal-body">
+            <!-- <h2 class="text-center mb-4"></h2> -->
+            <div class="row">
+              <div class="col-7 bg-secondary.bg-gradient rounded shadow-dark">
+                <form
+                  action="/submit-form"
+                  method="POST"
+                  style="max-width: 100%"
+                >
+                  <div class="row">
+                    <div class="mb-3 col-10">
+                      <!-- <div class="input-group input-group-outline">
+                    <label class="form-label">Search</label>
+                    <input type="text" class="form-control">
+                  </div> -->
+                      <label for="productName" class="form-label"
+                        >Product Name:</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="productName"
+                        name="productName"
+                        required
+                      />
+                    </div>
+                    <div class="col-2">
+                      <div class="upload-container mt-3">
+                        <div class="upload-icon" id="uploadIcon">
+                          <i class="material-icons opacity-10 text-lg"
+                            >add_a_photo</i
+                          >
+                          <!-- <img
+                          src="https://static.vecteezy.com/system/resources/previews/001/631/580/original/add-photo-icon-with-camera-vector.jpg"
+                          alt="add image" width="50px"> -->
+                        </div>
+                        <input type="file" id="imageUpload" accept="image/*" />
+                        <img
+                          id="uploadedImage"
+                          src=""
+                          alt="Uploaded Image"
+                          onclick="document.getElementById('imageUpload').click();"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-4 col-md-4">
+                      <div class="mb-3">
+                        <label for="buyRate" class="form-label"
+                          >Buy Rate:</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="buyRate"
+                          name="buyRate"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4">
+                      <div class="mb-3">
+                        <label for="mrp" class="form-label">MRP:</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="mrp"
+                          name="mrp"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4">
+                      <div class="mb-3">
+                        <label for="saleRate" class="form-label"
+                          >Sale Rate:</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="saleRate"
+                          name="saleRate"
+                          required
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <!-- <div class="row">
+                  <div class="col-lg-5 col-md-5"></div>
+                  <div class="col-lg-5 col-md-5"></div>
+                  <div class="col-lg-2 col-md-2"></div>
+                </div> -->
+                  <div class="row">
+                    <div class="col-lg-4 col-md-4">
+                      <div class="mb-3">
+                        <label for="unit" class="form-label">Unit:</label>
+                        <a
+                          class="float-end text-warning cursor-pointer text-xs"
+                          id="openSecondModal"
+                          >+add unit</a
+                        >
+                        <select
+                          class="form-select"
+                          id="unit"
+                          name="unit"
+                          required
+                        >
+                          <option value="pieces">Pieces</option>
+                          <option value="grams">Grams</option>
+                          <option value="liters">Liters</option>
+                          <!-- Add more options as needed -->
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4">
+                      <div class="mb-3">
+                        <label for="category" class="form-label"
+                          >Category:</label
+                        >
+                        <a
+                          class="float-end text-danger cursor-pointer text-xs"
+                          id="addcategoryButton"
+                          >+add category</a
+                        >
+                        <select
+                          class="form-select"
+                          id="category"
+                          name="category"
+                          required
+                        >
+                          <option value="electronics">Electronics</option>
+                          <option value="clothing">Clothing</option>
+                          <option value="groceries">Groceries</option>
+                          <!-- Add more options as needed -->
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4">
+                      <div class="mb-3">
+                        <label for="lowStockWarning" class="form-label"
+                          >Low Stock Warning:</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="lowStockWarning"
+                          name="lowStockWarning"
+                          required
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-4 col-md-4">
+                      <div class="mb-3">
+                        <label for="hsnCode" class="form-label"
+                          >HSN Code:</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="hsnCode"
+                          name="hsnCode"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4">
+                      <div class="mb-3">
+                        <label for="gstRateType" class="form-label"
+                          >GST Rate Type:</label
+                        >
+                        <select
+                          class="form-select"
+                          id="gstRateType"
+                          name="gstRateType"
+                          required
+                        >
+                          <option value="5">5%</option>
+                          <option value="12">12%</option>
+                          <option value="18">18%</option>
+                          <option value="28">28%</option>
+                          <!-- Add more options as needed -->
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4">
+                      <div class="mb-3">
+                        <label for="expiryDate" class="form-label"
+                          >Expiry Date:</label
+                        >
+                        <input
+                          type="date"
+                          class="form-control"
+                          id="expiryDate"
+                          name="expiryDate"
+                          required
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="remark" class="form-label">Remark:</label>
+                    <textarea
+                      class="form-control"
+                      id="remark"
+                      name="remark"
+                    ></textarea>
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="quantity" class="form-label"
+                      >Enter Quantity:</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="quantity"
+                      name="quantity"
+                      required
+                    />
+                  </div>
+                </form>
+              </div>
+              <div
+                class="col-5 bg-secondary.bg-gradient rounded shadow-dark ms-auto"
+              >
+                <!-- <div class="row">
+                <div class="col-12">
+                  <div class="float-end mt-2">
+                    <button type="submit" class="btn btn-primary me-1">Save & Next</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                  </div>
+                </div>
+              </div> -->
+
+                <div class="mb-3">
+                  <label for="gstRateType" class="form-label"
+                    >Select Store:</label
+                  >
+                  <select
+                    class="form-select"
+                    id="gstRateType"
+                    name="gstRateType"
+                    required
+                  >
+                    <option value="default">Default</option>
+                    <option value="store1">Store1</option>
+                    <option value="store2">Store2</option>
+                    <option value="store3">Store3</option>
+                    <!-- Add more options as needed -->
+                  </select>
+                </div>
+                <div class="">
+                  <p>
+                    Available Quantity:
+                    <b class="font-weight-bolder mb-0">500</b>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save & Next</button>
+          <button type="button" class="btn btn-primary">Save</button>
+        </div> -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Out Model -->
+    <div
+      class="modal fade"
+      id="outbutton"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="staticBackdropLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" style="max-width: 600px">
+        <div class="modal-content">
+          <div class="modal-header">
+            <!-- Move close button to the left -->
+            <div class="d-flex justify-content-start mt-0">
+              <i
+                class="material-icons opacity-10"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+                style="font-size: 35px; cursor: pointer; margin-top: -5px"
+                >close</i
+              >
+              <!-- <button type="button" class="btn-close bg-dark" data-bs-dismiss="modal" aria-label="Close"></button> -->
+              <h5 class="modal-title ms-5 mt-0" id="staticBackdropLabel">
+                Out Stock
+              </h5>
+            </div>
+
+            <div class="float-end mt-0">
+              <button type="submit" class="btn btn-primary me-1">
+                Save & Next
+              </button>
+              <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+          </div>
+          <div class="modal-body">
+            <!-- <h2 class="text-center mb-4"></h2> -->
+            <div class="row">
+              <div class="col-8 bg-secondary.bg-gradient rounded shadow-dark">
+                <form
+                  action="/submit-form"
+                  method="POST"
+                  style="max-width: 100%"
+                >
+                  <div class="mb-3">
+                    <label for="partyType" class="form-label"
+                      >Product Name:</label
+                    >
+                    <select
+                      class="form-select"
+                      id="partyType"
+                      name="partyType"
+                      required
+                    >
+                      <option value="">Select product</option>
+                      <option value="supplier">Supplier</option>
+                    </select>
+                  </div>
+                  <div class="row">
+                    <div class="mb-3">
+                      <label for="partyType" class="form-label">Party:</label>
+                      <select
+                        class="form-select"
+                        id="partyType"
+                        name="partyType"
+                        required
+                      >
+                        <option value="">Individual(optional)</option>
+                        <option value="supplier">Supplier</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-6">
+                      <div class="mb-3">
+                        <label for="quantity" class="form-label"
+                          >Quantity:</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="quantity"
+                          name="quantity"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <label for="Total_amount" class="form-label"
+                        >Sale Rate:</label
+                      >
+                      <div class="input-container w-100">
+                        <span class="rupee-icon"></span>
+                        <input
+                          type="number"
+                          class="input-field"
+                          placeholder="Enter amount"
+                          aria-label="Amount (in INR)"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <hr />
+                  <div class="row">
+                    <div class="col-6">
+                      <label for="Total_amount" class="form-label"
+                        >Total Amount:</label
+                      >
+                    </div>
+                    <div class="col-6">
+                      <div class="input-container w-100">
+                        <span class="rupee-icon"></span>
+                        <input
+                          type="number"
+                          class="input-field"
+                          placeholder="Enter amount"
+                          aria-label="Amount (in INR)"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-6">
+                      <label class="form-check-label" for="sameAsBilling"
+                        >Receive Amount</label
+                      >
+                      <input
+                        type="checkbox"
+                        class="form-check-input"
+                        style="border: 2px solid; border-radius: 40%"
+                        id="sameAsBilling"
+                      />
+                    </div>
+                    <div class="col-6">
+                      <div class="input-container w-100">
+                        <span class="rupee-icon"></span>
+                        <input
+                          type="number"
+                          class="input-field"
+                          placeholder="Enter amount"
+                          aria-label="Amount (in INR)"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-6">
+                      <label for="Total_amount" class="form-label"
+                        >Due Amount:</label
+                      >
+                    </div>
+                    <div class="col-6">
+                      <div class="input-container w-100">
+                        <span class="rupee-icon"></span>
+                        <input
+                          type="number"
+                          class="input-field"
+                          placeholder="Enter amount"
+                          aria-label="Amount (in INR)"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="remark" class="form-label">Remark:</label>
+                    <textarea
+                      class="form-control"
+                      id="remark"
+                      name="remark"
+                    ></textarea>
+                  </div>
+                </form>
+              </div>
+              <div class="col-4 bg-secondary.bg-gradient rounded shadow-dark">
+                <!-- <div class="row">
+                <div class="col-12">
+                  <div class="float-end mt-2">
+                    <button type="submit" class="btn btn-primary me-1">Save & Next</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                  </div>
+                </div>
+              </div> -->
+
+                <div class="mb-3">
+                  <label for="gstRateType" class="form-label"
+                    >Select Store:</label
+                  >
+                  <select
+                    class="form-select"
+                    id="gstRateType"
+                    name="gstRateType"
+                    required
+                  >
+                    <option value="default">Default</option>
+                    <option value="store1">Store1</option>
+                    <option value="store2">Store2</option>
+                    <option value="store3">Store3</option>
+                    <!-- Add more options as needed -->
+                  </select>
+                </div>
+                <div class="">
+                  <p class="font-weight-normal" style="font-size: 13px">
+                    Available Quantity:
+                    <b class="font-weight-bolder mb-0">500</b>
+                  </p>
+                </div>
+                <div class="">
+                  <p class="font-weight-normal" style="font-size: 13px">
+                    Profit: <b class="font-weight-bolder mb-0">500 rs</b>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save & Next</button>
+          <button type="button" class="btn btn-primary">Save</button>
+        </div> -->
+        </div>
+      </div>
+    </div>
+    <!-- In Model -->
+    <div
+      class="modal fade"
+      id="inbutton"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="staticBackdropLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" style="max-width: 600px">
+        <div class="modal-content">
+          <div class="modal-header">
+            <!-- Move close button to the left -->
+            <div class="d-flex justify-content-start mt-0">
+              <i
+                class="material-icons opacity-10"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+                style="font-size: 35px; cursor: pointer; margin-top: -5px"
+                >close</i
+              >
+              <!-- <button type="button" class="btn-close bg-dark" data-bs-dismiss="modal" aria-label="Close"></button> -->
+              <h5 class="modal-title ms-5 mt-0" id="staticBackdropLabel">
+                In Stock
+              </h5>
+            </div>
+
+            <div class="float-end mt-0">
+              <button type="submit" class="btn btn-primary me-1">
+                Save & Next
+              </button>
+              <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+          </div>
+          <div class="modal-body">
+            <!-- <h2 class="text-center mb-4"></h2> -->
+            <div class="row">
+              <div class="col-8 bg-secondary.bg-gradient rounded shadow-dark">
+                <form
+                  action="/submit-form"
+                  method="POST"
+                  style="max-width: 100%"
+                >
+                  <div class="mb-3">
+                    <label for="partyType" class="form-label"
+                      >Product Name:</label
+                    >
+                    <select
+                      class="form-select"
+                      id="partyType"
+                      name="partyType"
+                      required
+                    >
+                      <option value="">Select product</option>
+                      <option value="supplier">Supplier</option>
+                    </select>
+                  </div>
+                  <div class="row">
+                    <div class="mb-3">
+                      <label for="partyType" class="form-label">Party:</label>
+                      <select
+                        class="form-select"
+                        id="partyType"
+                        name="partyType"
+                        required
+                      >
+                        <option value="">Individual(optional)</option>
+                        <option value="supplier">Supplier</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="mb-3">
+                      <label for="quantity" class="form-label">Quantity:</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="quantity"
+                        name="quantity"
+                      />
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-6">
+                      <label for="Total_amount" class="form-label"
+                        >Sale Rate:</label
+                      >
+                      <div class="input-container w-100">
+                        <span class="rupee-icon"></span>
+                        <input
+                          type="number"
+                          class="input-field"
+                          placeholder="Enter amount"
+                          aria-label="Amount (in INR)"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <label for="Total_amount" class="form-label"
+                        >Buy Rate:</label
+                      >
+                      <div class="input-container w-100">
+                        <span class="rupee-icon"></span>
+                        <input
+                          type="number"
+                          class="input-field"
+                          placeholder="Enter amount"
+                          aria-label="Amount (in INR)"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <hr />
+                  <div class="row">
+                    <div class="col-6">
+                      <label for="Total_amount" class="form-label"
+                        >Total Amount:</label
+                      >
+                    </div>
+                    <div class="col-6">
+                      <div class="input-container w-100">
+                        <span class="rupee-icon"></span>
+                        <input
+                          type="number"
+                          class="input-field"
+                          placeholder="Enter amount"
+                          aria-label="Amount (in INR)"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-6">
+                      <label class="form-check-label" for="sameAsBilling"
+                        >Paid Amount</label
+                      >
+                      <input
+                        type="checkbox"
+                        class="form-check-input"
+                        style="border: 2px solid; border-radius: 40%"
+                        id="sameAsBilling"
+                      />
+                    </div>
+                    <div class="col-6">
+                      <div class="input-container w-100">
+                        <span class="rupee-icon"></span>
+                        <input
+                          type="number"
+                          class="input-field"
+                          placeholder="Enter amount"
+                          aria-label="Amount (in INR)"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-6">
+                      <label for="Total_amount" class="form-label"
+                        >Due Amount:</label
+                      >
+                    </div>
+                    <div class="col-6">
+                      <div class="input-container w-100">
+                        <span class="rupee-icon"></span>
+                        <input
+                          type="number"
+                          class="input-field"
+                          placeholder="Enter amount"
+                          aria-label="Amount (in INR)"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="remark" class="form-label">Remark:</label>
+                    <textarea
+                      class="form-control"
+                      id="remark"
+                      name="remark"
+                    ></textarea>
+                  </div>
+                </form>
+              </div>
+              <div class="col-4 bg-secondary.bg-gradient rounded shadow-dark">
+                <!-- <div class="row">
+               <div class="col-12">
+                 <div class="float-end mt-2">
+                   <button type="submit" class="btn btn-primary me-1">Save & Next</button>
+                   <button type="submit" class="btn btn-primary">Save</button>
+                 </div>
+               </div>
+             </div> -->
+
+                <div class="mb-3">
+                  <label for="gstRateType" class="form-label"
+                    >Select Store:</label
+                  >
+                  <select
+                    class="form-select"
+                    id="gstRateType"
+                    name="gstRateType"
+                    required
+                  >
+                    <option value="default">Default</option>
+                    <option value="store1">Store1</option>
+                    <option value="store2">Store2</option>
+                    <option value="store3">Store3</option>
+                    <!-- Add more options as needed -->
+                  </select>
+                </div>
+                <div class="">
+                  <p class="font-weight-normal" style="font-size: 13px">
+                    Available Quantity:
+                    <b class="font-weight-bolder mb-0">500</b>
+                  </p>
+                </div>
+                <div class="">
+                  <p class="font-weight-normal" style="font-size: 13px">
+                    Buy Rate: <b class="font-weight-bolder mb-0">50 rs</b>
+                  </p>
+                </div>
+                <div class="">
+                  <p class="font-weight-normal" style="font-size: 13px">
+                    Sale Rate: <b class="font-weight-bolder mb-0">65 rs</b>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="modal-footer">
+         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+         <button type="button" class="btn btn-primary">Save & Next</button>
+         <button type="button" class="btn btn-primary">Save</button>
+       </div> -->
+        </div>
+      </div>
+    </div>
+
+    <!-- model for view details -->
+    <!-- Button trigger modal -->
+    <!-- Add unit model -->
+    <div
+      class="modal fade"
+      id="addUnit"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="staticBackdropLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" style="max-width: 450px">
+        <div class="modal-content">
+          <div class="modal-header">
+            <!-- Move close button to the left -->
+            <div class="d-flex justify-content-start mt-0">
+              <!-- <button type="button" class="btn-close bg-dark" data-bs-dismiss="modal" aria-label="Close"></button> -->
+              <h5 class="modal-title mt-0" id="staticBackdropLabel">
+                Create New Unit & Secondary unit
+              </h5>
+            </div>
+
+            <div class="float-end mt-0">
+              <i
+                class="material-icons opacity-10"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+                style="font-size: 35px; cursor: pointer; margin-top: -5px"
+                >close</i
+              >
+            </div>
+          </div>
+          <div class="modal-body">
+            <!-- <h2 class="text-center mb-4"></h2> -->
+            <div class="row">
+              <div class="col-12">
+                <form
+                  action="/submit-form"
+                  class="m-0"
+                  method="POST"
+                  style="max-width: 100%"
+                >
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="div1" id="div1">
+                        <div class="mb-3">
+                          <label for="storeName" class="form-label"
+                            >Unit Name: <i class="text-danger">*</i></label
+                          >
+                          <!-- <p class="float-end text-warning cursor-pointer text-xs " id="sec" >jjj</p> -->
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="storeName"
+                            name="storeName"
+                            placeholder="Enter Unit Name"
+                            required
+                          />
+                        </div>
+                      </div>
+                      <div class="form-check form-switch">
+                        <label class="form-check-label" for="secondUnit"
+                          >create secondary unit</label
+                        >
+                        <input
+                          class="form-check-input mt-2"
+                          type="checkbox"
+                          role="switch"
+                          id="secondUnits"
+                          style="background-color: grey"
+                        />
+                      </div>
+                      <div class="row d-none" id="div2">
+                        <div class="mb-3 col">
+                          <label for="primaryUnit" class="form-label"
+                            >Primary Unit</label
+                          >
+                          <select
+                            class="form-select"
+                            id="primaryUnit"
+                            aria-label="Default select example"
+                          >
+                            <option value="Piece">Piece</option>
+                            <option value="KG">KG</option>
+                            <option value="Meter">Meter</option>
+                          </select>
+                        </div>
+                        <div class="mb-3 col">
+                          <label for="secondaryUnit" class="form-label"
+                            >Secondary Unit</label
+                          >
+                          <select
+                            class="form-select"
+                            id="secondaryUnit"
+                            aria-label="Default select example"
+                          >
+                            <option value="Piece">Piece</option>
+                            <option value="KG">KG</option>
+                            <option value="Meter">Meter</option>
+                          </select>
+                        </div>
+                        <div class="row">
+                          <label for="conversion-rate"
+                            >Add Conversion Rate</label
+                          >
+                          <div>
+                            <span class="unit-label" id="primary-label"
+                              >1 Piece</span
+                            >
+                            =
+                            <input
+                              type="number"
+                              id="conversion-rate"
+                              placeholder="Enter rate"
+                            />
+                            <span class="unit-label" id="secondary-label"
+                              >Pack</span
+                            >
+                            <p class="text-xxs text-danger">
+                              For Ex: 1 KG = 1000 Gram
+                            </p>
+                          </div>
+                          <div class="summary" id="summary-text">
+                            Conversion Summary: 1 Piece = ... Pack
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="modal-footer pb-0">
+              <button
+                type="button"
+                class="btn btn-outline-secondary mb-0"
+                data-bs-dismiss="modal"
+              >
+                Cancel
+              </button>
+              <button type="button" class="btn btn-outline-info mb-0">
+                Save changes
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="viewDetails"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="staticBackdropLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">
+              Product History!
+            </h5>
+            <h6 class="text-center">Total Transaction <span>6</span>!</h6>
+            <i
+              class="material-icons opacity-10"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+              style="font-size: 35px; cursor: pointer; margin-top: -5px"
+              >close</i
+            >
+            <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-12">
+                <div class="card my-4">
+                  <div
+                    class="card-header p-0 position-relative mt-n4 mx-3 z-index-2"
+                  >
+                    <div
+                      class="bg-dark shadow-dark border-radius-lg pt-4 pb-3 ps-2 pe-2"
+                    >
+                      <div class="row">
+                        <div class="col-3">
+                          <div class="d-flex px-2">
+                            <div>
+                              <img
+                                src="../assets/img/team-1.jpg"
+                                class="border-radius-xl me-2"
+                                style="width: 80px"
+                                alt="spotify"
+                              />
+                            </div>
+                          </div>
+                          <div class="mt-2 ms-2">
+                            <span class="text-sm text-white">Product Name</span>
+                          </div>
+                        </div>
+                        <div class="col-3">
+                          <ul class="list-group">
+                            <li
+                              class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg"
+                            >
+                              <div class="d-flex flex-column">
+                                <span class="mb-2 text-xs"
+                                  >Buy Rate:
+                                  <span
+                                    class="text-dark font-weight-bold ms-sm-2"
+                                    >₹40</span
+                                  ></span
+                                >
+                                <span class="mb-2 text-xs"
+                                  >Sale Rate:
+                                  <span
+                                    class="text-dark ms-sm-2 font-weight-bold"
+                                    >₹60</span
+                                  ></span
+                                >
+                                <span class="text-xs"
+                                  >In Hand:
+                                  <span
+                                    class="text-dark ms-sm-2 font-weight-bold"
+                                    >100</span
+                                  ></span
+                                >
+                              </div>
+                              <!-- <div class="ms-auto text-end">
+                          <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;"><i class="material-icons text-sm me-2">delete</i>Delete</a>
+                          <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i class="material-icons text-sm me-2">edit</i>Edit</a>
+                        </div> -->
+                            </li>
+                          </ul>
+                        </div>
+                        <div class="col-3">
+                          <ul class="list-group">
+                            <li
+                              class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg"
+                            >
+                              <div class="d-flex flex-column">
+                                <span class="mb-2 text-xs"
+                                  >Today In:
+                                  <span
+                                    class="text-dark font-weight-bold ms-sm-2"
+                                    >40</span
+                                  ></span
+                                >
+                                <span class="mb-2 text-xs"
+                                  >Today Out:
+                                  <span
+                                    class="text-dark ms-sm-2 font-weight-bold"
+                                    >60</span
+                                  ></span
+                                >
+                                <span class="text-xs"
+                                  >Today Profit:
+                                  <span
+                                    class="text-dark ms-sm-2 font-weight-bold"
+                                    >₹60</span
+                                  ></span
+                                >
+                              </div>
+                              <!-- <div class="ms-auto text-end">
+                          <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;"><i class="material-icons text-sm me-2">delete</i>Delete</a>
+                          <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i class="material-icons text-sm me-2">edit</i>Edit</a>
+                        </div> -->
+                            </li>
+                          </ul>
+                        </div>
+                        <div class="col-3">
+                          <ul class="list-group">
+                            <li
+                              class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg"
+                            >
+                              <div class="d-flex flex-column">
+                                <span class="mb-2 text-xs"
+                                  >Total Buy:
+                                  <span
+                                    class="text-dark font-weight-bold ms-sm-2"
+                                    >₹60</span
+                                  ></span
+                                >
+                                <span class="mb-2 text-xs"
+                                  >Total Sale:
+                                  <span
+                                    class="text-dark ms-sm-2 font-weight-bold"
+                                    >₹60</span
+                                  ></span
+                                >
+                                <span class="text-xs"
+                                  >Total Profit:
+                                  <span
+                                    class="text-dark ms-sm-2 font-weight-bold"
+                                    >₹60</span
+                                  ></span
+                                >
+                              </div>
+                              <!-- <div class="ms-auto text-end">
+                          <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;"><i class="material-icons text-sm me-2">delete</i>Delete</a>
+                          <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i class="material-icons text-sm me-2">edit</i>Edit</a>
+                        </div> -->
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-body px-0 pb-2">
+                    <div class="table-responsive p-0">
+                      <table
+                        class="table align-items-center justify-content-center mb-0"
+                      >
+                        <thead>
+                          <tr class="bg-gradient-light">
+                            <th
+                              class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                            >
+                              Type/Time
+                            </th>
+                            <th
+                              class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
+                            >
+                              Quantity
+                            </th>
+                            <th
+                              class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
+                            >
+                              Store
+                            </th>
+                            <th
+                              class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
+                            >
+                              Amount
+                            </th>
+                            <th
+                              class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
+                            >
+                              Entry By
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>
+                              <div class="d-flex px-2">
+                                <div class="mt-2">
+                                  <i
+                                    class="material-icons opacity-10"
+                                    style="color: red"
+                                    >arrow_upward</i
+                                  >
+                                </div>
+                                <div class="ms-2 my-auto">
+                                  <span class="mb-2 text-xs"
+                                    >05July2024
+                                    <span
+                                      class="text-dark font-weight-bold ms-sm-2"
+                                      >02:02PM</span
+                                    ></span
+                                  >
+                                </div>
+                              </div>
+                            </td>
+                            <td>
+                              <p class="text-sm font-weight-bold mb-0">2,500</p>
+                            </td>
+                            <td>
+                              <span class="text-xs font-weight-bold"
+                                >Store 2</span
+                              >
+                            </td>
+                            <td class="align-middle text-center">
+                              <div class="d-flex">
+                                <span class="me-2 text-xs font-weight-bold"
+                                  >₹60</span
+                                >
+                                <div>
+                                  <!-- <div class="progress">
+                                <div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow="60"
+                                  aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div>
+                              </div> -->
+                                </div>
+                              </div>
+                            </td>
+                            <td class="align-middle">
+                              <span class="text-xs font-weight-bold"
+                                >Rahul(Sale Operator)</span
+                              >
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <div class="d-flex px-2">
+                                <div class="mt-2">
+                                  <i
+                                    class="material-icons opacity-10"
+                                    style="color: green"
+                                    >arrow_downward</i
+                                  >
+                                </div>
+                                <div class="ms-2 my-auto">
+                                  <span class="mb-2 text-xs"
+                                    >05July2024
+                                    <span
+                                      class="text-dark font-weight-bold ms-sm-2"
+                                      >02:02PM</span
+                                    ></span
+                                  >
+                                </div>
+                              </div>
+                            </td>
+                            <td>
+                              <p class="text-sm font-weight-bold mb-0">2,500</p>
+                            </td>
+                            <td>
+                              <span class="text-xs font-weight-bold"
+                                >Store 2</span
+                              >
+                            </td>
+                            <td class="align-middle text-center">
+                              <div class="d-flex">
+                                <span class="me-2 text-xs font-weight-bold"
+                                  >₹60</span
+                                >
+                                <div>
+                                  <!-- <div class="progress">
+                                <div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow="60"
+                                  aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div>
+                              </div> -->
+                                </div>
+                              </div>
+                            </td>
+                            <td class="align-middle">
+                              <span class="text-xs font-weight-bold"
+                                >Rahul(Sale Operator)</span
+                              >
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <div class="d-flex px-2">
+                                <div class="mt-2">
+                                  <i
+                                    class="material-icons opacity-10"
+                                    style="color: red"
+                                    >arrow_upward</i
+                                  >
+                                </div>
+                                <div class="ms-2 my-auto">
+                                  <span class="mb-2 text-xs"
+                                    >05July2024
+                                    <span
+                                      class="text-dark font-weight-bold ms-sm-2"
+                                      >02:02PM</span
+                                    ></span
+                                  >
+                                </div>
+                              </div>
+                            </td>
+                            <td>
+                              <p class="text-sm font-weight-bold mb-0">2,500</p>
+                            </td>
+                            <td>
+                              <span class="text-xs font-weight-bold"
+                                >Store 2</span
+                              >
+                            </td>
+                            <td class="align-middle text-center">
+                              <div class="d-flex">
+                                <span class="me-2 text-xs font-weight-bold"
+                                  >₹60</span
+                                >
+                                <div>
+                                  <!-- <div class="progress">
+                                <div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow="60"
+                                  aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div>
+                              </div> -->
+                                </div>
+                              </div>
+                            </td>
+                            <td class="align-middle">
+                              <span class="text-xs font-weight-bold"
+                                >Rahul(Sale Operator)</span
+                              >
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <div class="d-flex px-2">
+                                <div class="mt-2">
+                                  <i
+                                    class="material-icons opacity-10"
+                                    style="color: green"
+                                    >arrow_downward</i
+                                  >
+                                </div>
+                                <div class="ms-2 my-auto">
+                                  <span class="mb-2 text-xs"
+                                    >05July2024
+                                    <span
+                                      class="text-dark font-weight-bold ms-sm-2"
+                                      >02:02PM</span
+                                    ></span
+                                  >
+                                </div>
+                              </div>
+                            </td>
+                            <td>
+                              <p class="text-sm font-weight-bold mb-0">2,500</p>
+                            </td>
+                            <td>
+                              <span class="text-xs font-weight-bold"
+                                >Store 2</span
+                              >
+                            </td>
+                            <td class="align-middle text-center">
+                              <div class="d-flex">
+                                <span class="me-2 text-xs font-weight-bold"
+                                  >₹60</span
+                                >
+                                <div>
+                                  <!-- <div class="progress">
+                                <div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow="60"
+                                  aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div>
+                              </div> -->
+                                </div>
+                              </div>
+                            </td>
+                            <td class="align-middle">
+                              <span class="text-xs font-weight-bold"
+                                >Rahul(Sale Operator)</span
+                              >
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <div class="d-flex px-2">
+                                <div class="mt-2">
+                                  <i
+                                    class="material-icons opacity-10"
+                                    style="color: red"
+                                    >arrow_upward</i
+                                  >
+                                </div>
+                                <div class="ms-2 my-auto">
+                                  <span class="mb-2 text-xs"
+                                    >05July2024
+                                    <span
+                                      class="text-dark font-weight-bold ms-sm-2"
+                                      >02:02PM</span
+                                    ></span
+                                  >
+                                </div>
+                              </div>
+                            </td>
+                            <td>
+                              <p class="text-sm font-weight-bold mb-0">2,500</p>
+                            </td>
+                            <td>
+                              <span class="text-xs font-weight-bold"
+                                >Store 2</span
+                              >
+                            </td>
+                            <td class="align-middle text-center">
+                              <div class="d-flex">
+                                <span class="me-2 text-xs font-weight-bold"
+                                  >₹60</span
+                                >
+                                <div>
+                                  <!-- <div class="progress">
+                                <div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow="60"
+                                  aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div>
+                              </div> -->
+                                </div>
+                              </div>
+                            </td>
+                            <td class="align-middle">
+                              <span class="text-xs font-weight-bold"
+                                >Rahul(Sale Operator)</span
+                              >
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <div class="d-flex px-2">
+                                <div class="mt-2">
+                                  <i
+                                    class="material-icons opacity-10"
+                                    style="color: green"
+                                    >arrow_downward</i
+                                  >
+                                </div>
+                                <div class="ms-2 my-auto">
+                                  <span class="mb-2 text-xs"
+                                    >05July2024
+                                    <span
+                                      class="text-dark font-weight-bold ms-sm-2"
+                                      >02:02PM</span
+                                    ></span
+                                  >
+                                </div>
+                              </div>
+                            </td>
+                            <td>
+                              <p class="text-sm font-weight-bold mb-0">2,500</p>
+                            </td>
+                            <td>
+                              <span class="text-xs font-weight-bold"
+                                >Store 2</span
+                              >
+                            </td>
+                            <td class="align-middle text-center">
+                              <div class="d-flex">
+                                <span class="me-2 text-xs font-weight-bold"
+                                  >₹60</span
+                                >
+                                <div>
+                                  <!-- <div class="progress">
+                                <div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow="60"
+                                  aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div>
+                              </div> -->
+                                </div>
+                              </div>
+                            </td>
+                            <td class="align-middle">
+                              <span class="text-xs font-weight-bold"
+                                >Rahul(Sale Operator)</span
+                              >
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <!-- <button type="button" class="btn btn-primary">Understood</button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- category moddel -->
+    <div
+      class="modal fade"
+      id="addCategory"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="staticBackdropLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" style="max-width: 450px">
+        <div class="modal-content">
+          <div class="modal-header">
+            <!-- Move close button to the left -->
+            <div class="d-flex justify-content-start mt-0">
+              <!-- <button type="button" class="btn-close bg-dark" data-bs-dismiss="modal" aria-label="Close"></button> -->
+              <h5 class="modal-title mt-0" id="staticBackdropLabel">
+                Create New Category/Sub Category
+              </h5>
+            </div>
+
+            <div class="float-end mt-0">
+              <i
+                class="material-icons opacity-10"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+                style="font-size: 35px; cursor: pointer; margin-top: -5px"
+                >close</i
+              >
+            </div>
+          </div>
+          <div class="modal-body">
+            <!-- <h2 class="text-center mb-4"></h2> -->
+            <div class="row">
+              <div class="col-12">
+                <form
+                  action="/submit-form"
+                  class="m-0"
+                  method="POST"
+                  style="max-width: 100%"
+                >
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="div1" id="cat1">
+                        <div class="mb-3">
+                          <label for="categoryName" class="form-label"
+                            >Category Name: <i class="text-danger">*</i></label
+                          >
+                          <!-- <p class="float-end text-warning cursor-pointer text-xs " id="sec" >jjj</p> -->
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="categoryName"
+                            name="categoryName"
+                            placeholder="Enter Category Name"
+                            required
+                          />
+                        </div>
+                      </div>
+                      <div class="form-check form-switch">
+                        <label class="form-check-label" for="subCategories"
+                          >create sub category</label
+                        >
+                        <input
+                          class="form-check-input mt-2"
+                          type="checkbox"
+                          role="switch"
+                          id="subCategories"
+                          style="background-color: gray"
+                        />
+                      </div>
+                      <div class="row d-none" id="cat2">
+                        <div class="mb-3 col">
+                          <label for="primaryUnit" class="form-label"
+                            >Select Category</label
+                          >
+                          <select
+                            class="form-select"
+                            id="primaryUnit"
+                            aria-label="Default select example"
+                          >
+                            <option value="Piece">Piece</option>
+                            <option value="KG">KG</option>
+                            <option value="Meter">Meter</option>
+                          </select>
+                        </div>
+                        <div class="mb-3">
+                          <label for="categoryName" class="form-label"
+                            >Sub Category Name:</label
+                          >
+                          <!-- <p class="float-end text-warning cursor-pointer text-xs " id="sec" >jjj</p> -->
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="subCategoryName"
+                            name="SubCategoryName"
+                            placeholder="Enter Sub Category Name"
+                            required
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="modal-footer pb-0">
+              <button
+                type="button"
+                class="btn btn-outline-secondary mb-0"
+                data-bs-dismiss="modal"
+              >
+                Cancel
+              </button>
+              <button type="button" class="btn btn-outline-info mb-0">
+                Save changes
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fixed-plugin">
+      <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
+        <i class="material-icons py-2">settings</i>
+      </a>
+      <div class="card shadow-lg">
+        <div class="card-header pb-0 pt-3">
+          <div class="float-start">
+            <h5 class="mt-3 mb-0">Material UI Configurator</h5>
+            <p>See our dashboard options.</p>
+          </div>
+          <div class="float-end mt-4">
+            <button
+              class="btn btn-link text-dark p-0 fixed-plugin-close-button"
+            >
+              <i class="material-icons">clear</i>
+            </button>
+          </div>
+          <!-- End Toggle Button -->
+        </div>
+        <hr class="horizontal dark my-1" />
+        <div class="card-body pt-sm-3 pt-0">
+          <!-- Sidebar Backgrounds -->
+          <div>
+            <h6 class="mb-0">Sidebar Colors</h6>
+          </div>
+          <a href="javascript:void(0)" class="switch-trigger background-color">
+            <div class="badge-colors my-2 text-start">
+              <span
+                class="badge filter bg-dark active"
+                data-color="primary"
+                onclick="sidebarColor(this)"
+              ></span>
+              <span
+                class="badge filter bg-gradient-dark"
+                data-color="dark"
+                onclick="sidebarColor(this)"
+              ></span>
+              <span
+                class="badge filter bg-gradient-info"
+                data-color="info"
+                onclick="sidebarColor(this)"
+              ></span>
+              <span
+                class="badge filter bg-gradient-success"
+                data-color="success"
+                onclick="sidebarColor(this)"
+              ></span>
+              <span
+                class="badge filter bg-gradient-warning"
+                data-color="warning"
+                onclick="sidebarColor(this)"
+              ></span>
+              <span
+                class="badge filter bg-gradient-danger"
+                data-color="danger"
+                onclick="sidebarColor(this)"
+              ></span>
+            </div>
+          </a>
+          <!-- Sidenav Type -->
+          <div class="mt-3">
+            <h6 class="mb-0">Sidenav Type</h6>
+            <p class="text-sm">Choose between 2 different sidenav types.</p>
+          </div>
+          <div class="d-flex">
+            <button
+              class="btn bg-gradient-dark px-3 mb-2 active"
+              data-class="bg-gradient-dark"
+              onclick="sidebarType(this)"
+            >
+              Dark
+            </button>
+            <button
+              class="btn bg-gradient-dark px-3 mb-2 ms-2"
+              data-class="bg-transparent"
+              onclick="sidebarType(this)"
+            >
+              Transparent
+            </button>
+            <button
+              class="btn bg-gradient-dark px-3 mb-2 ms-2"
+              data-class="bg-white"
+              onclick="sidebarType(this)"
+            >
+              White
+            </button>
+          </div>
+          <p class="text-sm d-xl-none d-block mt-2">
+            You can change the sidenav type just on desktop view.
+          </p>
+          <!-- Navbar Fixed -->
+          <div class="mt-3 d-flex">
+            <h6 class="mb-0">Navbar Fixed</h6>
+            <div class="form-check form-switch ps-0 ms-auto my-auto">
+              <input
+                class="form-check-input mt-1 ms-auto"
+                type="checkbox"
+                id="navbarFixed"
+                onclick="navbarFixed(this)"
+              />
+            </div>
+          </div>
+          <hr class="horizontal dark my-3" />
+          <div class="mt-2 d-flex">
+            <h6 class="mb-0">Light / Dark</h6>
+            <div class="form-check form-switch ps-0 ms-auto my-auto">
+              <input
+                class="form-check-input mt-1 ms-auto"
+                type="checkbox"
+                id="dark-version"
+                onclick="darkMode(this)"
+              />
+            </div>
+          </div>
+          <hr class="horizontal dark my-sm-4" />
+          <a class="btn btn-outline-dark w-100" href="">View documentation</a>
+          <div class="w-100 text-center">
+            <a
+              class="github-button"
+              href="https://github.com/creativetimofficial/material-dashboard"
+              data-icon="octicon-star"
+              data-size="large"
+              data-show-count="true"
+              aria-label="Star creativetimofficial/material-dashboard on GitHub"
+              >Star</a
+            >
+            <h6 class="mt-3">Thank you for sharing!</h6>
+            <a
+              href="https://twitter.com/intent/tweet?text=Check%20Material%20UI%20Dashboard%20made%20by%20%40CreativeTim%20%23webdesign%20%23dashboard%20%23bootstrap5&amp;url=https%3A%2F%2Fwww.creative-tim.com%2Fproduct%2Fsoft-ui-dashboard"
+              class="btn btn-dark mb-0 me-2"
+              target="_blank"
+            >
+              <i class="fab fa-twitter me-1" aria-hidden="true"></i> Tweet
+            </a>
+            <a
+              href="https://www.facebook.com/sharer/sharer.php?u=https://www.creative-tim.com/product/material-dashboard"
+              class="btn btn-dark mb-0 me-2"
+              target="_blank"
+            >
+              <i class="fab fa-facebook-square me-1" aria-hidden="true"></i>
+              Share
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Button trigger modal -->
+    <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#detailsModal">
+  Launch demo modal
+</button> -->
+
+    <!-- All details Modal -->
+    <div
+      class="modal fade"
+      id="detailsModal"
+      tabindex="-1"
+      aria-labelledby="detailsModalLabel"
+      aria-hidden="true"
+    >
+      <div
+        class="modal-dialog modal-dialog-scrollable"
+        style="max-width: 450px"
+      >
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="detailsModalLabel">Summary</h1>
+            <div class="float-end mt-0">
+              <i
+                class="material-icons opacity-10"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+                style="font-size: 35px; cursor: pointer; margin-top: -5px"
+                >close</i
+              >
+            </div>
+          </div>
+          <div class="modal-body">
+            <!-- Header Section
+               <div class="mb-3 text-center">
+                <h6 class="fw-bold text-uppercase text-primary">Summary</h6>
+                <p class="small text-muted mb-0">All values as of 17 Jan 2025</p>
+              </div> -->
+            <div class="bg-dark opacity-25 my-3" style="height: 2px"></div>
+            <!-- Today's Profit -->
+            <div class="mb-3 p-3 rounded border shadow-sm bg-light">
+              <p class="fw-bold text-secondary mb-1 small text-center">
+                Total Business Today's 17 Jan 2025
+              </p>
+              <div class="mb-2">
+                <div class="d-flex justify-content-between">
+                  <span class="text-dark small">Today's Profit</span>
+                  <span class="text-muted small">₹0.00</span>
+                </div>
+              </div>
+
+              <!-- Sale -->
+              <div class="mb-2">
+                <div class="d-flex justify-content-between">
+                  <span class="text-dark small">Sale</span>
+                  <span class="text-muted small">₹0.00</span>
+                </div>
+              </div>
+
+              <!-- Purchase -->
+              <div class="mb-2">
+                <div class="d-flex justify-content-between">
+                  <span class="text-dark small">Purchase</span>
+                  <span class="text-muted small">₹0.00</span>
+                </div>
+              </div>
+            </div>
+            <!-- Divider -->
+            <div class="bg-dark opacity-25 my-3" style="height: 2px"></div>
+
+            <div class="mb-3 p-3 rounded border shadow-sm bg-light">
+              <p class="fw-bold text-secondary mb-1 small text-center">
+                Total Stock Product/Price (at present)
+              </p>
+              <div class="mb-2">
+                <div class="d-flex justify-content-between">
+                  <span class="text-dark small">Total Product</span>
+                  <span class="text-muted small">567</span>
+                </div>
+              </div>
+
+              <!-- Sale -->
+              <div class="mb-2">
+                <div class="d-flex justify-content-between">
+                  <span class="text-dark small">Selling product price</span>
+                  <span class="text-muted small">₹542715363.00</span>
+                </div>
+              </div>
+
+              <!-- Purchase -->
+              <div class="mb-2">
+                <div class="d-flex justify-content-between">
+                  <span class="text-dark small">Purchased Product Price</span>
+                  <span class="text-muted small">₹99752339.86</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Divider -->
+            <div class="bg-dark opacity-25 my-3" style="height: 2px"></div>
+
+            <div class="mb-3 p-3 rounded border shadow-sm bg-light">
+              <p class="fw-bold text-secondary mb-1 small text-center">
+                Stock History (at present)
+              </p>
+              <div class="mb-2">
+                <div class="d-flex justify-content-between">
+                  <span class="text-dark small">Total Stock Qty</span>
+                  <span class="text-muted small">789</span>
+                </div>
+              </div>
+
+              <!-- Sale -->
+              <div class="mb-2">
+                <div class="d-flex justify-content-between">
+                  <span class="text-dark small">Total Out</span>
+                  <span class="text-muted small">₹678.00</span>
+                </div>
+              </div>
+
+              <!-- Purchase -->
+              <div class="mb-2">
+                <div class="d-flex justify-content-between">
+                  <span class="text-dark small">Total In</span>
+                  <span class="text-muted small">₹678.00</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--   Core JS Files   -->
+    <script src="../assets/js/core/popper.min.js"></script>
+    <script src="../assets/js/core/bootstrap.min.js"></script>
+    <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
+    <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+    <script>
+      var win = navigator.platform.indexOf("Win") > -1;
+      if (win && document.querySelector("#sidenav-scrollbar")) {
+        var options = {
+          damping: "0.5",
+        };
+        Scrollbar.init(document.querySelector("#sidenav-scrollbar"), options);
+      }
+    </script>
+
+    <script>
+      document
+        .getElementById("button_purchase")
+        .addEventListener("click", function () {
+          document.getElementById("main_page").style.display = "none";
+          document.getElementById("purchase").style.display = "block";
+        });
+
+      document
+        .getElementById("button_main")
+        .addEventListener("click", function () {
+          document.getElementById("purchase").style.display = "none";
+          document.getElementById("main_page").style.display = "block";
+        });
+    </script>
+
+    <script>
+      // Add event listeners to radio buttons dynamically
+      document
+        .querySelectorAll('input[name="reportToggle"]')
+        .forEach((radio) => {
+          radio.onclick = function () {
+            // Hide all reports
+            document.querySelectorAll(".report").forEach((div) => {
+              div.style.display = "none";
+            });
+
+            // Show the selected report
+            const targetId = this.getAttribute("data-target");
+            document.getElementById(targetId).style.display = "block";
+          };
+        });
+    </script>
+
+    <!-- for the unit conversion -->
+    <script>
+      const primaryUnit = document.getElementById("primaryUnit");
+      const secondaryUnit = document.getElementById("secondaryUnit");
+      const primaryLabel = document.getElementById("primary-label");
+      const secondaryLabel = document.getElementById("secondary-label");
+      const conversionRateInput = document.getElementById("conversion-rate");
+      const summaryText = document.getElementById("summary-text");
+
+      function updateLabels() {
+        primaryLabel.textContent = `1 ${primaryUnit.value}`;
+        secondaryLabel.textContent = secondaryUnit.value;
+        updateSummary();
+      }
+
+      function updateSummary() {
+        const rate = conversionRateInput.value;
+        const primary = primaryUnit.value;
+        const secondary = secondaryUnit.value;
+        if (rate) {
+          summaryText.textContent = `Conversion Summary: 1 ${primary} = ${rate} ${secondary}`;
+        } else {
+          summaryText.textContent = `Conversion Summary: 1 ${primary} = ... ${secondary}`;
+        }
+      }
+      primaryUnit.addEventListener("change", updateLabels);
+      secondaryUnit.addEventListener("change", updateLabels);
+      conversionRateInput.addEventListener("input", updateSummary);
+    </script>
+
+    <script>
+      const toggleSwitch = document.getElementById("secondUnits");
+      const div1 = document.getElementById("div1");
+      const div2 = document.getElementById("div2");
+
+      toggleSwitch.addEventListener("change", () => {
+        if (toggleSwitch.checked) {
+          div1.classList.add("d-none"); // Hide div1
+          div2.classList.remove("d-none"); // Show div2
+          toggleSwitch.style.backgroundColor = "green";
+        } else {
+          div1.classList.remove("d-none"); // Show div1
+          div2.classList.add("d-none"); // Hide div2
+          toggleSwitch.style.backgroundColor = "gray";
+        }
+      });
+    </script>
+    <script>
+      const toggleSwitch2 = document.getElementById("subCategories");
+      const cat1 = document.getElementById("cat1");
+      const cat2 = document.getElementById("cat2");
+
+      toggleSwitch2.addEventListener("change", () => {
+        if (toggleSwitch2.checked) {
+          cat1.classList.add("d-none"); // Hide cat1
+          cat2.classList.remove("d-none"); // Show cat2
+          toggleSwitch2.style.backgroundColor = "green";
+        } else {
+          cat1.classList.remove("d-none"); // Show cat1
+          cat2.classList.add("d-none"); // Hide cat2
+          toggleSwitch2.style.backgroundColor = "gray";
+        }
+      });
+    </script>
+
+    <!-- for calender -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+      flatpickr("#birthdate", {
+        dateFormat: "Y-m-d", // Set desired date format
+        maxDate: new Date(), // Set maximum selectable date (e.g., today's date)
+        locale: {
+          firstDayOfWeek: 1, // Start week on Monday
+          weekdays: {
+            shorthand: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
+            longhand: [
+              "Sunday",
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday",
+            ],
+          },
+          months: {
+            shorthand: [
+              "Jan",
+              "Feb",
+              "Mar",
+              "Apr",
+              "May",
+              "Jun",
+              "Jul",
+              "Aug",
+              "Sep",
+              "Oct",
+              "Nov",
+              "Dec",
+            ],
+            longhand: [
+              "January",
+              "February",
+              "March",
+              "April",
+              "May",
+              "June",
+              "July",
+              "August",
+              "September",
+              "October",
+              "November",
+              "December",
+            ],
+          },
+        },
+        theme: "light", // Use a light theme for the date picker
+        onReady: function (selectedDates, dateStr, instance) {
+          instance.calendarContainer.classList.add("flatpickr-calendar"); // Apply custom styling to the calendar
+        },
+      });
+    </script>
+
+    <!-- image -->
+    <script>
+      function showImage(file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          const uploadedImage = document.getElementById("uploadedImage");
+          uploadedImage.src = e.target.result;
+          uploadedImage.classList.add("show");
+
+          // Hide the upload icon
+          document.getElementById("uploadIcon").style.display = "none";
+        };
+        reader.readAsDataURL(file);
+      }
+
+      document
+        .getElementById("uploadIcon")
+        .addEventListener("click", function () {
+          document.getElementById("imageUpload").click();
+        });
+
+      document
+        .getElementById("imageUpload")
+        .addEventListener("change", function (event) {
+          const file = event.target.files[0];
+          if (file) {
+            showImage(file);
+          }
+        });
+    </script>
+
+    <script>
+      var firstModal = new bootstrap.Modal(
+        document.getElementById("staticBackdrop")
+      );
+      var secondModal = new bootstrap.Modal(document.getElementById("addUnit"));
+      var thirdModal = new bootstrap.Modal(
+        document.getElementById("addCategory")
+      );
+
+      document
+        .getElementById("openSecondModal")
+        .addEventListener("click", function () {
+          document
+            .querySelector(".modal.show .modal-dialog")
+            .classList.add("reduce-opacity");
+          secondModal.show();
+        });
+
+      document
+        .getElementById("addUnit")
+        .addEventListener("hidden.bs.modal", function () {
+          document
+            .querySelector(".modal.show .modal-dialog")
+            .classList.remove("reduce-opacity");
+        });
+      document
+        .getElementById("addcategoryButton")
+        .addEventListener("click", function () {
+          document
+            .querySelector(".modal.show .modal-dialog")
+            .classList.add("reduce-opacity");
+          thirdModal.show();
+        });
+
+      document
+        .getElementById("addCategory")
+        .addEventListener("hidden.bs.modal", function () {
+          document
+            .querySelector(".modal.show .modal-dialog")
+            .classList.remove("reduce-opacity");
+        });
+    </script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+    integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+    integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+    crossorigin="anonymous"></script> -->
+    <!-- end calender -->
+    <!-- bootstrap 5 -->
+    <!-- Begin of Chaport Live Chat code -->
+    <script type="text/javascript">
+      (function (w, d, v3) {
+        w.chaportConfig = {
+          appId: "67a5edf9e1bda30198f07ca4",
+        };
+
+        if (w.chaport) return;
+        v3 = w.chaport = {};
+        v3._q = [];
+        v3._l = {};
+        v3.q = function () {
+          v3._q.push(arguments);
+        };
+        v3.on = function (e, fn) {
+          if (!v3._l[e]) v3._l[e] = [];
+          v3._l[e].push(fn);
+        };
+        var s = d.createElement("script");
+        s.type = "text/javascript";
+        s.async = true;
+        s.src = "https://app.chaport.com/javascripts/insert.js";
+        var ss = d.getElementsByTagName("script")[0];
+        ss.parentNode.insertBefore(s, ss);
+      })(window, document);
+    </script>
+    <!-- End of Chaport Live Chat code -->
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Github buttons -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+    <script src="../assets/js/material-dashboard.min.js?v=3.0.0"></script>
+  </body>
+</html>

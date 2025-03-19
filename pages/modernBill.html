@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Modern Tax Invoice</title>
+  <style>
+    /* body {
+      margin: 0;
+      font-family: 'Roboto', Arial, sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+    } */
+
+    .modernBill .invoice-container {
+      max-width: 800px;
+      margin: 30px auto;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+
+    .modernBill .header {
+      background-color: #4CAF50;
+      color: #fff;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modernBill .header .logo {
+      max-height: 60px;
+    }
+
+    .header .company-info {
+      text-align: right;
+    }
+
+    .modernBill .header h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+
+    .modernBill .details {
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      /* border-bottom: 2px solid #f0f0f0; */
+    }
+
+    .modernBill .details .section {
+      flex: 1;
+      padding-right: 10px;
+    }
+
+    .modernBill .details .section strong {
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .modernBill .table {
+      width: 100%;
+      border-collapse: collapse;
+      /* margin: 20px 0; */
+    }
+
+    .modernBill .table th,
+    .table td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #f0f0f0;
+      font-size: 14px;
+    }
+
+    .modernBill .table th {
+      background-color: #f5f5f5;
+      color: #555;
+    }
+
+    .modernBill .footer {
+      padding: 20px;
+      background-color: #f5f5f5;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modernBill .footer .terms {
+      flex: 2;
+    }
+
+    .modernBill .footer .signature {
+      flex: 1;
+      text-align: center;
+    }
+
+    .modernBill .footer .signature img {
+      max-height: 60px;
+    }
+
+    .modernBill.totals {
+      margin-top: 10px;
+      text-align: right;
+      font-size: 16px;
+    }
+
+    @media (max-width: 600px) {
+
+      .modernBill .header,
+      .details,
+      .footer {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .modernBill .details .section {
+        padding-right: 0;
+        margin-bottom: 10px;
+      }
+
+      .modernBill .footer .terms {
+        margin-bottom: 10px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="modernBill">
+    <div class="invoice-container">
+      <!-- Header Section -->
+      <div class="header">
+        <img src="/assets/img/bruce-mars.jpg" alt="Logo" class="logo" />
+        <div class="company-info">
+          <h1>Aadishri Technologies</h1>
+          <p>Phone: 8596345874</p>
+          <p>Email: example@email.com</p>
+        </div>
+      </div>
+
+      <!-- Details Section -->
+      <div class="details">
+        <div class="section">
+          <strong>Bill To:</strong>
+          <p>Sampath Singh</p>
+          <p>04, KK Buildings, Main Street, Karol Bagh, New Delhi, Delhi</p>
+          <p>Pin: 110005</p>
+        </div>
+        <div class="section">
+          <strong>Ship To:</strong>
+          <p>Sampath Singh</p>
+          <p>06, BB Buildings, Ram Bagh, Karol Bagh, New Delhi, Delhi</p>
+          <p>Pin: 110005</p>
+        </div>
+        <div class="section">
+          <strong>Invoice Details:</strong>
+          <p>Invoice No: S01</p>
+          <p>Invoice Date: 10 Jan 2025</p>
+        </div>
+      </div>
+
+      <!-- Table Section -->
+      <table class="table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Items</th>
+            <th>HSN</th>
+            <th>Quantity</th>
+            <th>Rate</th>
+            <th>Tax / Unit</th>
+            <th>Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Apple</td>
+            <td>808</td>
+            <td>5 KG</td>
+            <td>100.00</td>
+            <td>5.00 (5%)</td>
+            <td>₹525.00</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Banana</td>
+            <td>803</td>
+            <td>5 KG</td>
+            <td>100.00</td>
+            <td>5.00 (5%)</td>
+            <td>₹525.00</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Orange</td>
+            <td>805</td>
+            <td>5 KG</td>
+            <td>100.00</td>
+            <td>5.00 (5%)</td>
+            <td>₹525.00</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Totals Section -->
+      <div class="totals">
+        <div style="margin-right: 20px;">
+          <p><strong>Extra Charges:</strong> ₹105.00</p>
+          <p><strong>Discount:</strong> -₹105.00</p>
+          <p><strong>Total:</strong> ₹1555.00</p>
+        </div>
+        <!-- <div>
+        
+      </div> -->
+      </div>
+
+      <!-- Footer Section -->
+      <div class="footer">
+        <div class="terms">
+          <strong>Terms & Conditions</strong>
+          <p>Ensure all details are accurate. Returns not accepted after 7 days.</p>
+        </div>
+        <div class="signature">
+          <img src="/assets/img/DefaultMan.jpg" alt="Authorized Signature" />
+          <p>Authorised Signature<br />Aadishri Technologies</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

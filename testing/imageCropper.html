@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image Upload, Crop & Compress</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css"
+    />
+  </head>
+  <body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="text-center">
+      <button
+        id="uploadBtn"
+        class="bg-blue-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-blue-600"
+      >
+        Upload Image
+      </button>
+      <input type="file" id="fileInput" accept="image/*" hidden />
+    </div>
+
+    <!-- Modal -->
+    <div
+      id="modal"
+      class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center hidden"
+    >
+      <div class="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
+        <h2 class="text-lg font-semibold mb-4">Crop & Compress Image</h2>
+        <div class="w-full flex justify-center">
+          <img id="cropImage" class="max-w-full" />
+        </div>
+        <div class="flex justify-end mt-4">
+          <button
+            id="cropSaveBtn"
+            class="bg-green-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-green-600"
+          >
+            Crop & Compress
+          </button>
+          <button
+            id="closeModal"
+            class="ml-2 bg-gray-400 text-white px-4 py-2 rounded-lg shadow-md hover:bg-gray-500"
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/browser-image-compression/dist/browser-image-compression.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const uploadBtn = document.getElementById("uploadBtn");
+        const fileInput = document.getElementById("fileInput");
+        const modal = document.getElementById("modal");
+        const closeModal = document.getElementById("closeModal");
+        const cropImage = document.getElementById("cropImage");
+        const cropSaveBtn = document.getElementById("cropSaveBtn");
+
+        let cropper;
+
+        // Open File Picker
+        uploadBtn.addEventListener("click", () => fileInput.click());
+
+        // Handle File Selection
+        fileInput.addEventListener("change", (event) => {
+          const file = event.target.files[0];
+          if (!file) return;
+
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            cropImage.src = e.target.result;
+            modal.classList.remove("hidden"); // Show modal
+          };
+          reader.readAsDataURL(file);
+        });
+
+        // Initialize Cropper when Image Loads
+        cropImage.onload = () => {
+          if (cropper) cropper.destroy();
+          cropper = new Cropper(cropImage, {
+            aspectRatio: 1, // Maintain square aspect ratio
+            viewMode: 2,
+            movable: true,
+            zoomable: true,
+            scalable: true,
+            cropBoxResizable: true,
+            minCropBoxWidth: 50, // Minimum crop size 50px
+            minCropBoxHeight: 50, // Minimum crop size 50px
+            ready() {
+              const imageData = cropper.getImageData();
+
+              // Enforce max crop size (200px)
+              let maxSize = Math.min(200, imageData.width, imageData.height);
+              cropper.setCropBoxData({
+                left: (imageData.width - maxSize) / 2, // Centering
+                top: (imageData.height - maxSize) / 2, // Centering
+                width: maxSize,
+                height: maxSize,
+              });
+            },
+            cropmove() {
+              let cropBoxData = cropper.getCropBoxData();
+              if (cropBoxData.width > 200) cropBoxData.width = 200;
+              if (cropBoxData.height > 200) cropBoxData.height = 200;
+              cropper.setCropBoxData(cropBoxData);
+            },
+          });
+        };
+
+        // Crop & Compress Image
+        cropSaveBtn.addEventListener("click", async () => {
+          if (!cropper) return;
+
+          const croppedCanvas = cropper.getCroppedCanvas({
+            width: 200,
+            height: 200,
+          });
+          croppedCanvas.toBlob(
+            async (blob) => {
+              const compressedBlob = await compressImage(blob);
+              downloadImage(compressedBlob);
+              modal.classList.add("hidden"); // Hide modal
+            },
+            "image/jpeg",
+            0.9
+          );
+        });
+
+        // Function to Compress Image
+        async function compressImage(imageBlob) {
+          const options = {
+            maxSizeMB: 0.2,
+            maxWidthOrHeight: 800,
+            useWebWorker: true,
+          };
+          return await imageCompression(imageBlob, options);
+        }
+
+        // Download Image (Replace this with Upload Logic)
+        function downloadImage(blob) {
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement("a");
+          a.href = url;
+          a.download = "cropped_compressed.jpg";
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+        }
+
+        // Close Modal
+        closeModal.addEventListener("click", () =>
+          modal.classList.add("hidden")
+        );
+      });
+    </script>
+  </body>
+</html>

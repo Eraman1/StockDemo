@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tax Invoice</title>
+    <style>
+        .basictheme {
+            font-family: Arial, sans-serif;
+            /* margin: 20px; */
+        }
+
+        .basictheme .invoice {
+            max-width: 700px;
+            margin: 20px auto;
+            background-color: white;
+        }
+
+        .basictheme .header {
+            display: flex;
+            border: 1px solid #000;
+        }
+
+        .basictheme .header .left {
+            display: flex;
+        }
+
+        .basictheme .header .logo {
+            width: 100px;
+            /* Adjust as needed */
+            height: 100px;
+            /* Adjust as needed */
+            border: 1px solid #ccc;
+        }
+
+        .basictheme .header h1 {
+            margin: 0;
+            font-size: 24px;
+            color: blue;
+        }
+
+        .basictheme .header p {
+            margin: 3px 0;
+            font-size: 13px;
+            color: #000;
+        }
+
+        .basictheme .header .right {
+            text-align: right;
+            font-size: 14px;
+        }
+
+        .basictheme .details {
+            display: flex;
+            border-left: 1px solid #000;
+            border-right: 1px solid #000;
+        }
+
+        .basictheme .details .section p {
+            margin: 0;
+            font-size: small;
+            color: #000;
+        }
+
+        .basictheme .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 10px;
+            border-top: 1px solid #000;
+            border-bottom: 1px solid #000;
+            border-left: none !important;
+            border-right: none !important;
+        }
+
+        .basictheme .table th,
+        .basictheme .table td {
+            border-left: 1px solid #000 !important;
+            border-right: 1px solid #000 !important;
+            border-top: none !important;
+            border-bottom: none !important;
+            padding: 5px;
+            text-align: left;
+            font-size: small;
+            word-wrap: break-word;
+            word-break: break-word;
+            vertical-align: top;
+            color: #000;
+        }
+
+        .basictheme .footer-section {
+            width: 100%;
+            border: 1px solid #000;
+            border-collapse: collapse;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+        }
+
+        .basictheme .payment-details {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #000;
+        }
+
+        .basictheme .payment-item {
+            flex: 1;
+            text-align: left;
+            vertical-align: center;
+            font-size: 12px;
+            padding: 7px;
+            border-right: 1px solid #000;
+            color: #000;
+        }
+
+        .basictheme .payment-item:last-child {
+            border-right: none;
+        }
+
+        .basictheme .remark-terms {
+            display: flex;
+        }
+
+        .basictheme .remark {
+            flex: 2;
+            padding: 10px;
+            color: #000;
+        }
+
+        .basictheme .terms {
+            flex: 3;
+            padding: 10px;
+            color: #000;
+        }
+
+        .basictheme .terms p {
+            font-size: small;
+            ;
+            color: #000;
+        }
+
+        .basictheme .signature {
+            flex: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            border-left: 1px solid #000;
+            color: #000;
+        }
+
+        .basictheme .signature img {
+            width: 200px;
+            height: 80px;
+        }
+
+        .basictheme .signature p {
+            margin: 10px 0 0;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .basictheme .table .item-column {
+            width: 30%;
+            /* Adjust this width as needed */
+        }
+
+        .basictheme table td:nth-child(2) {
+            width: 30%;
+            /* Ensures the column width applies to the data rows too */
+        }
+
+        @media print {
+            body {
+                width: 100%;
+            }
+
+            @page {
+                size: 100% auto;
+                margin: 0px;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="basictheme">
+        <div class="invoice">
+            <div class="header">
+                <div class="left" style="width: 50%; padding: 10px">
+
+                    <div style="padding-left: 10px">
+                        <h1 class="headText">chawdi</h1>
+                        <p>Phone: 8596345874</p>
+                        <p>Email: example@email.com</p>
+                    </div>
+                </div>
+                <div class="left" style="width: 50%; padding: 10px; border-left: 1px solid black">
+                    <div>
+                        <p><strong>Invoice No:</strong> S01</p>
+                        <p><strong>Invoice Date:</strong> 10 Jan 2025</p>
+                        <p><strong>Email:</strong> hhhhh</p>
+                    </div>
+                </div>
+            </div>
+            <div class="details">
+                <div class="section" style="width: 50%; padding: 10px">
+                    <p><strong>BILL TO</strong></p>
+                    <p>Sampath Singh</p>
+                    <p>04, KK Buildings, Main Street, Karol Bagh, New Delhi, Delhi</p>
+                    <p>Pin: 110005</p>
+                    <p>Phone: +91 9981028177</p>
+                    <p>PAN Number: AVHPC6971A</p>
+                    <p>GSTIN: 08HULMP2839A1AB</p>
+                    <p>Place of Supply: Delhi</p>
+                </div>
+                <div class="section" style="width: 50%; padding: 10px; border-left: 1px solid black">
+                    <p><strong>SHIP TO</strong></p>
+                    <p>Sampath Singh</p>
+                    <p>06, BB Buildings, Ram Bagh, Karol Bagh, New Delhi, Delhi</p>
+                    <p>Pin: 110005</p>
+                </div>
+            </div>
+            <table class="table changeHeader">
+                <thead>
+                    <tr style="border-bottom:1px solid black ;">
+                        <th>#</th>
+                        <th class="item-column">Items</th>
+
+                        <th>Quantity</th>
+                        <th>Rate</th>
+
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Apple</td>
+
+                        <td>5 KG</td>
+                        <td>100.00</td>
+
+                        <td>525.00</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Banana</td>
+
+                        <td>5 KG</td>
+                        <td>100.00</td>
+
+                        <td>525.00</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Orange</td>
+
+                        <td>5 KG</td>
+                        <td>100.00</td>
+
+                        <td>525.00</td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td style="text-align: right;">Extra Charges</td>
+
+                        <td>&nbsp;</td>
+                        <td>100.00</td>
+
+                        <td> ₹105.00</td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td style="text-align: right;">Discount</td>
+
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+
+                        <td>- ₹105.00</td>
+                    </tr>
+                    <tr style="border-top:1px solid black ;">
+                        <td>&nbsp;</td>
+                        <td style="text-align: right;"><b>Total</b></td>
+
+                        <td><b>15</b></td>
+                        <td>&nbsp;</td>
+
+                        <td><b>₹1555.00</b></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>

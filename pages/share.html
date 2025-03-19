@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Compact Bill</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    .bill-container {
+      max-width: 700px;
+      margin: 20px auto;
+      padding: 10px;
+      border: 1px solid #000;
+      font-size: 12px;
+    }
+
+    .header, .footer {
+      text-align: center;
+    }
+
+    .header h2 {
+      margin: 0;
+      color: blue;
+      font-size: 18px;
+    }
+
+    .header p {
+      margin: 0;
+      font-size: 12px;
+      color: gray;
+    }
+
+    .details, .footer {
+      margin: 10px 0;
+    }
+
+    .details div {
+      display: flex;
+      justify-content: space-between;
+      margin: 5px 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 10px 0;
+    }
+
+    table th, table td {
+      border: 1px solid #000;
+      text-align: center;
+      padding: 5px;
+    }
+
+    table th {
+      background-color: #f4f4f4;
+    }
+
+    .amount {
+      text-align: right;
+      margin-top: 10px;
+    }
+
+    .footer img {
+      width: 60px;
+      height: 60px;
+    }
+
+    .footer p {
+      font-size: 12px;
+      margin: 0;
+    }
+
+    .share-btn {
+      text-align: center;
+      margin: 20px;
+    }
+
+    .share-btn button {
+      padding: 10px 20px;
+      font-size: 14px;
+      cursor: pointer;
+      background-color: green;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+  <div class="bill-container" id="invoice">
+    <!-- Header -->
+    <div class="header">
+      <h2>chawdi</h2>
+      <p>Phone: 91213772076</p>
+    </div>
+
+    <!-- Details Section -->
+    <div class="details">
+      <div>
+        <div>
+          <strong>BILL TO:</strong><br>
+          Sampath Singh<br>
+          04, KK Buildings, Main Street<br>
+          New Delhi, Delhi<br>
+          Phone: +91 9981028177
+        </div>
+        <div>
+          <strong>Invoice No:</strong> S01<br>
+          <strong>Date:</strong> 20 Dec 2024<br>
+          <strong>Email Key:</strong> ddc<br>
+          <strong>FSSAI Key:</strong> fvbn
+        </div>
+      </div>
+    </div>
+
+    <!-- Items Table -->
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Items</th>
+          <th>Quantity</th>
+          <th>Rate</th>
+          <th>Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Apple</td>
+          <td>5 KG</td>
+          <td>105.00</td>
+          <td>525.00</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Banana</td>
+          <td>5 KG</td>
+          <td>105.00</td>
+          <td>525.00</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Orange</td>
+          <td>5 KG</td>
+          <td>105.00</td>
+          <td>525.00</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Summary -->
+    <div class="amount">
+      Extra Charges: ₹ 105.00<br>
+      Discount: ₹ -50.00<br><br>
+      <strong>Total: ₹ 1630.00</strong><br>
+      Received Amount: ₹ 1000.00<br>
+      <strong>Due Amount: ₹ 630.00</strong>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <p><strong>Amount in Words:</strong> INR One Thousand Six Hundred Thirty Only</p>
+      <p><strong>Remark:</strong> 1. Warranty - 3 Years</p>
+      <img src="pizza.jpg" alt="Signature">
+      <p>Authorised Signature For chawdi</p>
+    </div>
+  </div>
+
+  <!-- Share Button -->
+  <div class="share-btn">
+    <button onclick="shareOnWhatsApp()">Share on WhatsApp</button>
+  </div>
+
+  <script>
+    function shareOnWhatsApp() {
+      const phoneNumber = '+919981028177';
+      const invoice = document.getElementById('invoice');
+
+      html2pdf().from(invoice).toPdf().get('pdf').then(function (pdf) {
+        const blob = pdf.output('blob');
+        const url = URL.createObjectURL(blob);
+
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'invoice.pdf';
+        link.click();
+        
+        const message = encodeURIComponent('Invoice generated. Please attach the PDF manually.');
+        const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
+        window.open(whatsappUrl, '_blank');
+      });
+    }
+  </script>
+</body>
+</html>

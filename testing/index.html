@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Print Example</title>
+    <style>
+        .print-area {
+            padding: 20px;
+            border: 1px solid #000;
+            margin: 20px;
+        }
+        .print-btn {
+            margin: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="print-area" id="content">
+        <h1>Welcome to Excellence Academy</h1>
+        <p>Providing CBSE education for classes 6 to 12 in all subjects.</p>
+    </div>
+
+    <button class="print-btn" onclick="printContent()">Print This Page</button>
+
+    <script>
+        function printContent() {
+            var printArea = document.getElementById('content').innerHTML;
+            var originalContent = document.body.innerHTML;
+            
+            document.body.innerHTML = printArea;
+            window.print();
+            document.body.innerHTML = originalContent;
+        }
+    </script>
+
+</body>
+</html>

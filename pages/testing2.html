@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Searchable Select with Add Option in Modal</title>
+    <!-- Fonts and icons -->
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
+    <!-- Nucleo Icons -->
+    <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
+    <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+    <!-- Font Awesome Icons -->
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <!-- CSS Files -->
+    <link id="pagestyle" href="../assets/css/material-dashboard.css?v=3.0.0" rel="stylesheet" />
+     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+     <style>
+          .dropdown-menu.show {
+            display: block;
+        }
+     </style>
+</head>
+
+<body>
+
+    <!-- Button to Open the Modal -->
+    <li class="nav-item">
+        <a class="nav-link mb-0 px-0 py-1" data-toggle="modal" data-target="#myModal">
+          <i class="fas fa-user-edit text-secondary text-sm" title="Edit Profile"></i>
+          <span class="ms-1">Edit</span>
+        </a>
+    </li>
+
+    <!-- The Modal -->
+    <div class="modal fade" id="myModal" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Modal Heading</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <label for="price-unit-modal">Price Unit*</label>
+                    <select id="priceUnitModal" class="form-control" style="width: 100%;">
+                        <option value="" disabled selected>Select a price unit</option>
+                        <option value="Piece">Piece</option>
+                        <option value="Box">Box</option>
+                        <option value="Packet">Packet</option>
+                        <option value="Peti">Peti</option>
+                        <option value="Bottle">Bottle</option>
+                    </select>
+                </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+            Dropdown button
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+        </ul>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $('.dropdown-item').click(function(event) {
+                event.stopPropagation(); // Prevent the default behavior of closing the dropdown
+            });
+    
+            $('#dropdownMenuButton1').click(function() {
+                var $dropdownMenu = $(this).next('.dropdown-menu');
+                if ($dropdownMenu.hasClass('show')) {
+                    $dropdownMenu.removeClass('show');
+                } else {
+                    $dropdownMenu.addClass('show');
+                }
+            });
+        });
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        $('#myModal').on('shown.bs.modal', function () {
+            $('#priceUnitModal').select2({
+                placeholder: 'Select a price unit',
+                allowClear: true,
+                tags: true,
+                createTag: function (params) {
+                    var term = $.trim(params.term);
+                    if (term === '') {
+                        return null;
+                    }
+                    return {
+                        id: term,
+                        text: term,
+                        newOption: true
+                    };
+                },
+                templateResult: function (data) {
+                    var $result = $('<span></span>');
+                    $result.text(data.text);
+                    if (data.newOption) {
+                        $result.append(' <em>(add new)</em>');
+                    }
+                    return $result;
+                }
+            });
+        });
+    </script>
+
+    <!-- Additional scripts for the image upload feature and other functionalities -->
+    <script>
+        function showImage(file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const uploadedImage = document.getElementById('uploadedImage');
+                uploadedImage.src = e.target.result;
+                uploadedImage.classList.add('show');
+
+                // Hide the upload icon
+                document.getElementById('uploadIcon').style.display = 'none';
+            }
+            reader.readAsDataURL(file);
+        }
+
+        document.getElementById('uploadIcon').addEventListener('click', function () {
+            document.getElementById('imageUpload').click();
+        });
+
+        document.getElementById('imageUpload').addEventListener('change', function (event) {
+            const file = event.target.files[0];
+            if (file) {
+                showImage(file);
+            }
+        });
+    </script>
+    <!-- Core JS Files -->
+    <script src="../assets/js/core/popper.min.js"></script>
+    <script src="../assets/js/core/bootstrap.min.js"></script>
+    <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
+    <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+    <script>
+        var win = navigator.platform.indexOf('Win') > -1;
+        if (win && document.querySelector('#sidenav-scrollbar')) {
+            var options = {
+                damping: '0.5'
+            }
+            Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+        }
+    </script>
+    <!-- Github buttons -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+    <script src="../assets/js/material-dashboard.min.js?v=3.0.0"></script>
+
+</body>
+
+</html>

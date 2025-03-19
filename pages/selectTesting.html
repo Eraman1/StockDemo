@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Searchable Select with Add Option</title>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <style>
+        .select2-container--default .select2-selection--single .select2-selection__rendered {
+            padding-left: 0.75em;
+        }
+    </style>
+</head>
+<body>
+    <label for="price-unit-modal">Price Unit*</label>
+    <select id="priceUnitModal" class="form-control" style="width: 100%;">
+        <option value="" disabled selected>Select a price unit</option>
+        <option value="Piece">Piece</option>
+        <option value="Box">Box</option>
+        <option value="Packet">Packet</option>
+        <option value="Peti">Peti</option>
+        <option value="Bottle">Bottle</option>
+    </select>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#priceUnitModal').select2({
+                placeholder: 'Select a price unit',
+                allowClear: true,
+                tags: true,
+                createTag: function(params) {
+                    var term = $.trim(params.term);
+                    if (term === '') {
+                        return null;
+                    }
+                    return {
+                        id: term,
+                        text: term,
+                        newOption: true
+                    };
+                },
+                templateResult: function(data) {
+                    var $result = $('<span></span>');
+                    $result.text(data.text);
+                    if (data.newOption) {
+                        $result.append(' <em>(add new)</em>');
+                    }
+                    return $result;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
