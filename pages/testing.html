@@ -117,34 +117,7 @@
       paid.show();
     }
   </script>
+  <script src="/assets/js/text.js"></script>
 </body>
 
 </html>
-
-
-
-
-<div class="modal-header " style="height:70px">
-  <!-- Move close button to the left -->
-  <div class="d-flex justify-content-start mt-0">
-    <i class="material-icons opacity-10" data-bs-dismiss="modal" aria-label="Close"
-      style="font-size: 35px; cursor: pointer; margin-top: -5px;">close</i>
-    <!-- <button type="button" class="btn-close bg-dark" data-bs-dismiss="modal" aria-label="Close"></button> -->
-    <h5 class="modal-title ms-5 mt-0" id="staticBackdropLabel">Fill the Product Details</h5>
-  </div>
-
-  <div style="position: sticky; top: 0; background-color: white" class="float-end mt-0">
-
-    <!-- <%-- <asp:Button ID="btnSaveNew" Style="visibility:hidden" class="btn bg-gradient-info me-1"
-              OnClick="btnSaveNew_Click" OnClientClick="return ValidateForm('NEW');" runat="server" Text="Save & Next" />--%> -->
-    <input type="button" ID="btnSave" Width="150px" class="btn bg-gradient-info"
-      OnClick="return ValidateForm('SAVE','S');" Text="Save" />
-    <!-- <%-- <asp:Button ID="btnSave" Width="150px" ClientIDMode="Static" class="btn bg-gradient-info" runat="server"
-              OnClick="btnSave_Click" OnClientClick="return ValidateForm('SAVE');" Text="Save" />--%> -->
-    <asp:Button ID="btnSaveWithPic" ClientIDMode="Static" class="btn bg-gradient-info" Style=" display:none"
-      runat="server" OnClick="btnSave_Click" OnClientClick="return ValidateForm('SAVE','N');" Text="Save P" />
-  </div>
-</div>
-
-
-
